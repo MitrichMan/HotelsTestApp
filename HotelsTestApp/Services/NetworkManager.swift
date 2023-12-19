@@ -6,3 +6,47 @@
 //
 
 import Foundation
+
+class NetworkManager {
+    
+    static let shared = NetworkManager()
+    
+    private init() {}
+    
+    func fetchHotel() async throws -> Hotel {
+        guard let url = URL(string: API.hotelApi.rawValue) else {
+            throw NetworkError.invalidURL
+        }
+        let (data, _) = try await URLSession.shared.data(from: url)
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        guard let hotel = try? decoder.decode(Hotel.self, from: data) else {
+            throw NetworkError.decodingError
+        }
+        return hotel
+    }
+    
+    func fetchRooms() async throws -> Rooms {
+        guard let url = URL(string: API.roomsApi.rawValue) else {
+            throw NetworkError.invalidURL
+        }
+        let (data, _) = try await URLSession.shared.data(from: url)
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        guard let rooms = try? decoder.decode(Rooms.self, from: data) else {
+            throw NetworkError.decodingError
+        }
+        return rooms
+    }
+}
+
+enum NetworkError: Error {
+    case noData
+    case invalidURL
+    case decodingError
+}
+
+enum API: String {
+    case hotelApi = "https://run.mocky.io/v3/63866c74-d593-432c-af8e-f279d1a8d2ff"
+    case roomsApi = "https://run.mocky.io/v3/8b532701-709e-4194-a41c-1a903af00195"
+}
