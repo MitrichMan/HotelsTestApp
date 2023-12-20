@@ -27,6 +27,8 @@ struct BasicDataView: View {
         serviceCharge: 15
     )
     
+    
+    
     var body: some View {
         
         VStack(spacing: 8) {
@@ -34,15 +36,23 @@ struct BasicDataView: View {
             Text("Отель")
                 .font(.system(size: 18, weight: .medium))
             
-            CarouselView()
+            CarouselView(images: viewModel.images)
                 .padding(.bottom, 8)
             
-                MarkView()
+            RatingView(
+                rating: viewModel.hotel.horating,
+                ratingName: viewModel.hotel.ratingName
+            )
             
-            Text(mokHotel.hotelName)
+            Text(viewModel.hotel.hotelName)
             
             }
         .padding(.horizontal, 16)
+        
+        .task {
+            await viewModel.fetchHotel()
+        }
+        
     }
 }
 
@@ -50,17 +60,19 @@ struct BasicDataView: View {
     BasicDataView()
 }
 
+// MARK: CarouselView
 struct CarouselView: View {
     
-    private let mokPhotos = ["Image1", "Image2", "Image3", "Image4", "Image5"]
-
+    let images: [String]
+    
     var body: some View {
         TabView {
 
-            ForEach((0...mokPhotos.count - 1), id: \.self) { index in
-                Image(mokPhotos[index])
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
+            ForEach((0...images.count - 1), id: \.self) { index in
+                HotelPhotoView(
+                    images: images,
+                    index: index
+                )
             }
         }
         .tabViewStyle(PageTabViewStyle())
@@ -70,10 +82,16 @@ struct CarouselView: View {
     }
 }
 
-struct MarkView: View {
+
+//MARK: RatingView
+struct RatingView: View {
+    let rating: Int
+    let ratingName: String
+    
+    
     var body: some View {
         HStack {
-            ZStack {
+            ZStack(alignment: .leading) {
                 Color("MarkBackground")
                 
                 HStack(spacing: 2) {
@@ -81,8 +99,9 @@ struct MarkView: View {
                         .resizable()
                         .frame(width: 16.0, height: 16.0)
                         .aspectRatio(contentMode: .fit)
+                        .padding(.leading, 10)
                         
-                    Text("5 Превосходно")
+                    Text("\(rating) \(ratingName)")
                         .font(.system(size: 16, weight: .medium))
                         .foregroundStyle(.mark)
                 }
@@ -92,5 +111,17 @@ struct MarkView: View {
             
             Spacer()
         }
+    }
+}
+
+// MARK: HotelPhotoView
+struct HotelPhotoView: View {
+    let images: [String]
+    var index: Int
+    
+    var body: some View {
+        Image(images[index])
+            .resizable()
+            .aspectRatio(contentMode: .fill)
     }
 }

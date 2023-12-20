@@ -12,6 +12,8 @@ struct HotelView: View {
         ZStack {
             Color("Background")
                 .ignoresSafeArea()
+            
+            BasicDataView()
         }
     }
 }
