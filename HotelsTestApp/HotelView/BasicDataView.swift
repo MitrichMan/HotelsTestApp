@@ -9,37 +9,87 @@ import SwiftUI
 
 struct BasicDataView: View {
     
-    @StateObject private var viewModel = BasicDataViewModel()
+    var hotel: Hotel
+    var images: [String]
+    var totalPrice: Int
     
     var body: some View {
-        
         VStack(spacing: 8) {
             
             Text("Отель")
                 .font(.system(size: 18, weight: .medium))
             
-            CarouselView(images: viewModel.images)
+            CarouselView(images: images)
                 .padding(.bottom, 8)
             
             RatingView(
-                rating: viewModel.hotel.horating,
-                ratingName: viewModel.hotel.ratingName
+                rating: hotel.horating,
+                ratingName: hotel.ratingName
             )
             
-            Text(viewModel.hotel.hotelName)
-            
-                .task {
-                    await viewModel.fetchHotel()
-                }
+            HStack {
+                Text(hotel.hotelName)
+                    .font(.system(size: 22, weight: .medium))
+                    .frame(height: 26, alignment: .leading)
+                
+                Spacer()
             }
-        .padding(.horizontal, 16)
-        
-        
+            
+            HStack {
+                Text(hotel.hotelAdress)
+                    .font(.system(size: 14, weight: .medium))
+                    .frame(height: 26, alignment: .leading)
+                    .foregroundStyle(.blue)
+                
+                Spacer()
+            }
+            
+            
+            HStack(alignment: .bottom){
+                Text("От \(totalPrice) ₽")
+                    .font(.system(size: 30, weight: .semibold))
+                    .frame(alignment: .leading)
+                
+                Spacer()
+                
+                Text("за тур с перелетом")
+                    .font(.system(size: 16, weight: .medium))
+                    .foregroundStyle(.gray)
+                    .frame(alignment: .trailing)
+            }
+        }
+        .padding(.top)
+//        .padding(.horizontal, 16)
     }
 }
 
 #Preview {
-    BasicDataView()
+    BasicDataView(
+        hotel: Hotel(
+            id: 0,
+            hotelName: "",
+            hotelAdress: "",
+            horating: 0,
+            ratingName: "",
+            departure: "",
+            arrivalCountry: "",
+            tourDateStart: "",
+            tourDateStop: "",
+            numberOfNights: 0,
+            room: "",
+            nutrition: "",
+            tourPrice: 0,
+            fuelCharge: 0,
+            serviceCharge: 0
+        ),
+        images: [
+            "Image1",
+            "Image2",
+            "Image3",
+            "Image4",
+            "Image5"
+        ], totalPrice: 100
+    )
 }
 
 // MARK: CarouselView
@@ -49,7 +99,7 @@ struct CarouselView: View {
     
     var body: some View {
         TabView {
-
+            
             ForEach((0...images.count - 1), id: \.self) { index in
                 HotelPhotoView(
                     images: images,
@@ -82,13 +132,13 @@ struct RatingView: View {
                         .frame(width: 16.0, height: 16.0)
                         .aspectRatio(contentMode: .fit)
                         .padding(.leading, 10)
-                        
+                    
                     Text("\(rating) \(ratingName)")
                         .font(.system(size: 16, weight: .medium))
                         .foregroundStyle(.mark)
                 }
             }
-            .frame(width: 149, height: 29)
+            .frame(width: 159, height: 29)
             .cornerRadius(5)
             
             Spacer()

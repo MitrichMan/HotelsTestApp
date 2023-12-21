@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4DBBB06A2B320DD3005130A0 /* BasicDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBBB0692B320DD3005130A0 /* BasicDataView.swift */; };
-		4DBBB06C2B320DE3005130A0 /* BasicDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBBB06B2B320DE3005130A0 /* BasicDataViewModel.swift */; };
 		4DBBB06E2B320DF6005130A0 /* DetailedDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBBB06D2B320DF6005130A0 /* DetailedDataView.swift */; };
-		4DBBB0702B320E06005130A0 /* DetailedDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBBB06F2B320E06005130A0 /* DetailedDataViewModel.swift */; };
 		4DBF8FE52B31C84B006FA6A7 /* HotelsTestAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF8FE42B31C84B006FA6A7 /* HotelsTestAppApp.swift */; };
 		4DBF8FE92B31C84E006FA6A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DBF8FE82B31C84E006FA6A7 /* Assets.xcassets */; };
 		4DBF8FEC2B31C84E006FA6A7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DBF8FEB2B31C84E006FA6A7 /* Preview Assets.xcassets */; };
@@ -28,9 +26,7 @@
 
 /* Begin PBXFileReference section */
 		4DBBB0692B320DD3005130A0 /* BasicDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDataView.swift; sourceTree = "<group>"; };
-		4DBBB06B2B320DE3005130A0 /* BasicDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDataViewModel.swift; sourceTree = "<group>"; };
 		4DBBB06D2B320DF6005130A0 /* DetailedDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedDataView.swift; sourceTree = "<group>"; };
-		4DBBB06F2B320E06005130A0 /* DetailedDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedDataViewModel.swift; sourceTree = "<group>"; };
 		4DBF8FE12B31C84B006FA6A7 /* HotelsTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HotelsTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DBF8FE42B31C84B006FA6A7 /* HotelsTestAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelsTestAppApp.swift; sourceTree = "<group>"; };
 		4DBF8FE82B31C84E006FA6A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -58,24 +54,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4DBBB0672B320D99005130A0 /* BasicDataView */ = {
-			isa = PBXGroup;
-			children = (
-				4DBBB0692B320DD3005130A0 /* BasicDataView.swift */,
-				4DBBB06B2B320DE3005130A0 /* BasicDataViewModel.swift */,
-			);
-			path = BasicDataView;
-			sourceTree = "<group>";
-		};
-		4DBBB0682B320DAE005130A0 /* DetailedDataView */ = {
-			isa = PBXGroup;
-			children = (
-				4DBBB06D2B320DF6005130A0 /* DetailedDataView.swift */,
-				4DBBB06F2B320E06005130A0 /* DetailedDataViewModel.swift */,
-			);
-			path = DetailedDataView;
-			sourceTree = "<group>";
-		};
 		4DBF8FD82B31C84B006FA6A7 = {
 			isa = PBXGroup;
 			children = (
@@ -130,8 +108,8 @@
 			children = (
 				4DBF8FF82B31D9B1006FA6A7 /* HotelView.swift */,
 				4DBF8FFA2B31D9C2006FA6A7 /* HotelViewModel.swift */,
-				4DBBB0672B320D99005130A0 /* BasicDataView */,
-				4DBBB0682B320DAE005130A0 /* DetailedDataView */,
+				4DBBB0692B320DD3005130A0 /* BasicDataView.swift */,
+				4DBBB06D2B320DF6005130A0 /* DetailedDataView.swift */,
 			);
 			path = HotelView;
 			sourceTree = "<group>";
@@ -242,7 +220,6 @@
 			files = (
 				4DBF90042B31DA51006FA6A7 /* BookingView.swift in Sources */,
 				4DBBB06A2B320DD3005130A0 /* BasicDataView.swift in Sources */,
-				4DBBB0702B320E06005130A0 /* DetailedDataViewModel.swift in Sources */,
 				4DBF8FF32B31D548006FA6A7 /* Hotel.swift in Sources */,
 				4DBF90092B31DAD5006FA6A7 /* NetworkManager.swift in Sources */,
 				4DBF8FF92B31D9B1006FA6A7 /* HotelView.swift in Sources */,
@@ -250,7 +227,6 @@
 				4DBF8FFE2B31D9FB006FA6A7 /* RoomView.swift in Sources */,
 				4DBF8FE52B31C84B006FA6A7 /* HotelsTestAppApp.swift in Sources */,
 				4DBBB06E2B320DF6005130A0 /* DetailedDataView.swift in Sources */,
-				4DBBB06C2B320DE3005130A0 /* BasicDataViewModel.swift in Sources */,
 				4DBF900C2B31FFE7006FA6A7 /* SuccessView.swift in Sources */,
 				4DBF90012B31DA1C006FA6A7 /* RoomViewModel.swift in Sources */,
 				4DBF90062B31DA61006FA6A7 /* BookingViewModel.swift in Sources */,
