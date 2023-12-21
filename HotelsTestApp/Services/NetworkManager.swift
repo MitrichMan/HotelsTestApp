@@ -22,7 +22,7 @@ class NetworkManager {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         guard let hotel = try? decoder.decode(Hotel.self, from: data) else {
             throw NetworkError.decodingError
-        }
+        } 
         return hotel
     }
     

@@ -8,26 +8,8 @@
 import SwiftUI
 
 struct BasicDataView: View {
+    
     @StateObject private var viewModel = BasicDataViewModel()
-    private let mokHotel = Hotel(
-        id: 1,
-        hotelName: "2",
-        hotelAdress: "3",
-        horating: 4,
-        ratingName: "5",
-        departure: "6",
-        arrivalCountry: "7",
-        tourDateStart: "8",
-        tourDateStop: "9",
-        numberOfNights: 10,
-        room: "11",
-        nutrition: "12",
-        tourPrice: 13,
-        fuelPrice: 14,
-        serviceCharge: 15
-    )
-    
-    
     
     var body: some View {
         
@@ -46,12 +28,12 @@ struct BasicDataView: View {
             
             Text(viewModel.hotel.hotelName)
             
+                .task {
+                    await viewModel.fetchHotel()
+                }
             }
         .padding(.horizontal, 16)
         
-        .task {
-            await viewModel.fetchHotel()
-        }
         
     }
 }

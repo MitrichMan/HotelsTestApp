@@ -23,9 +23,10 @@ class BasicDataViewModel: ObservableObject {
         room: "",
         nutrition: "",
         tourPrice: 0,
-        fuelPrice: 0,
+        fuelCharge: 0,
         serviceCharge: 0
     )
+    
     @Published var images = ["Image1", "Image2", "Image3", "Image4", "Image5"]
     
     func fetchHotel() async {
