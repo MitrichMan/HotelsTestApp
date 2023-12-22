@@ -34,8 +34,8 @@ struct HotelView: View {
                             .clipShape(
                                 .rect(
                                     topLeadingRadius: 0,
-                                    bottomLeadingRadius: 30,
-                                    bottomTrailingRadius: 30,
+                                    bottomLeadingRadius: 12,
+                                    bottomTrailingRadius: 12,
                                     topTrailingRadius: 0
                                 )
                             )
@@ -48,29 +48,12 @@ struct HotelView: View {
                                 )
                                 .padding()
                             }
-                            .cornerRadius(30)
+                            .cornerRadius(12)
                             
                         }
                     }
                     
-                    GoToRoomSelectionButtonView(
-                        rooms: Rooms(rooms: [Room(
-                        id: 1,
-                        name: "Стандартный номер с видом на бассейн",
-                        price: 186600,
-                        pricePer: "За 7 ночей с перелетом",
-                        peculiarities: [
-                            "Включен только завтрак",
-                            "Кондиционер"
-                        ],
-                        imageUrls: [
-                            "https://www.atorus.ru/sites/default/files/upload/image/News/56871/%D1%80%D0%B8%D0%BA%D1%81%D0%BE%D1%81%20%D1%81%D0%B8%D0%B3%D0%B5%D0%B9%D1%82.jpg",
-                            "https://q.bstatic.com/xdata/images/hotel/max1024x768/267647265.jpg?k=c8233ff42c39f9bac99e703900a866dfbad8bcdd6740ba4e594659564e67f191&o=",
-                            "https://worlds-trip.ru/wp-content/uploads/2022/10/white-hills-resort-5.jpeg"
-                        ]
-                    )]),
-                        hotel: viewModel.hotel
-                    )
+                    GoToRoomSelectionButtonView(hotel: viewModel.hotel)
                         .padding(.horizontal, 16)
                 }
                 
@@ -79,9 +62,12 @@ struct HotelView: View {
             .navigationBarTitleDisplayMode(.inline)
             
             
-            .task {
-                await viewModel.fetchHotel()
-            }
+        }
+//        .task {
+//            await viewModel.fetchHotel()
+//        }
+        .task {
+            await DataManager.shared.fetchHotel()
         }
     }
 }
@@ -91,11 +77,11 @@ struct HotelView: View {
 }
 
 struct GoToRoomSelectionButtonView: View {
-    let rooms: Rooms
+//    let rooms: Rooms
     let hotel: Hotel
     var body: some View {
         NavigationLink {
-            RoomView(rooms: rooms, hotel: hotel)
+            RoomView(hotel: hotel)
             
         } label: {
             HStack {

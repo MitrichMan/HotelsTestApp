@@ -31,7 +31,7 @@ class HotelViewModel: ObservableObject {
             calculateTotalPrice()
         }
     }
-        
+    
     var totalPrice = 0
     
     var images = DataManager.shared.images

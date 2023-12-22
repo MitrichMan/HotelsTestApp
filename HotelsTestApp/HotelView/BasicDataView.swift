@@ -96,34 +96,11 @@ struct BasicDataView: View {
     )
 }
 
-// MARK: CarouselView
-struct CarouselView: View {
-    
-    let images: [String]
-    
-    var body: some View {
-        TabView {
-            ForEach((0...images.count - 1), id: \.self) { index in
-                HotelPhotoView(
-                    images: images,
-                    index: index
-                )
-            }
-        }
-        .tabViewStyle(PageTabViewStyle())
-        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-        .frame(height: 257)
-        .cornerRadius(15)
-    }
-}
-
-
 //MARK: TileView
 struct TileView: View {
     let content: String
     let foregroundColor: Color
     let backlgroundColor: Color
-    
     
     var body: some View {
         Text("\(content)")
@@ -135,14 +112,3 @@ struct TileView: View {
     }
 }
 
-// MARK: HotelPhotoView
-struct HotelPhotoView: View {
-    let images: [String]
-    var index: Int
-    
-    var body: some View {
-        Image(images[index])
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-    }
-}

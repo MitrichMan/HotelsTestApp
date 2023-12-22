@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import Combine
 
-class DataManager {
+class DataManager: ObservableObject {
     static let shared = DataManager()
     
     @Published var hotel = Hotel(
@@ -26,7 +27,11 @@ class DataManager {
         tourPrice: 0,
         fuelCharge: 0,
         serviceCharge: 0
-    ) 
+    ) {
+        didSet {
+            objectWillChange.send()
+        }
+    }
     
     let images = ["Image1", "Image2", "Image3", "Image4", "Image5"]
     
@@ -47,6 +52,8 @@ class DataManager {
             image: "crossButton"
         )
     ]
+    
+    let objectWillChange = ObservableObjectPublisher()
     
     private init() {}
     
