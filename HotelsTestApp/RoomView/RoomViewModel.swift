@@ -6,3 +6,15 @@
 //
 
 import Foundation
+
+class RoomViewModel: ObservableObject {
+    @Published var rooms = Rooms(rooms: [])
+    
+    @MainActor func fetchHotel() async {
+        do {
+            rooms = try await NetworkManager.shared.fetchRooms()
+        } catch {
+            print(error)
+        }
+    }
+}

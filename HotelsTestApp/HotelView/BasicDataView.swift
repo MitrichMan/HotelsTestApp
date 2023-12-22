@@ -16,16 +16,21 @@ struct BasicDataView: View {
     var body: some View {
         VStack(spacing: 8) {
             
-            Text("Отель")
-                .font(.system(size: 18, weight: .medium))
-            
+//            Text("Отель")
+//                .font(.system(size: 18, weight: .medium))
+//            
             CarouselView(images: images)
                 .padding(.bottom, 8)
             
-            RatingView(
-                rating: hotel.horating,
-                ratingName: hotel.ratingName
-            )
+            HStack {
+                TileView(
+                    content: "★ \(hotel.horating) \(hotel.ratingName)",
+                    foregroundColor: .mark,
+                    backlgroundColor: .markBackground
+                )
+                
+                Spacer()
+            }
             
             HStack {
                 Text(hotel.hotelName)
@@ -59,7 +64,6 @@ struct BasicDataView: View {
             }
         }
         .padding(.top)
-//        .padding(.horizontal, 16)
     }
 }
 
@@ -99,7 +103,6 @@ struct CarouselView: View {
     
     var body: some View {
         TabView {
-            
             ForEach((0...images.count - 1), id: \.self) { index in
                 HotelPhotoView(
                     images: images,
@@ -115,34 +118,20 @@ struct CarouselView: View {
 }
 
 
-//MARK: RatingView
-struct RatingView: View {
-    let rating: Int
-    let ratingName: String
+//MARK: TileView
+struct TileView: View {
+    let content: String
+    let foregroundColor: Color
+    let backlgroundColor: Color
     
     
     var body: some View {
-        HStack {
-            ZStack(alignment: .leading) {
-                Color("MarkBackground")
-                
-                HStack(spacing: 2) {
-                    Image("MarkStar")
-                        .resizable()
-                        .frame(width: 16.0, height: 16.0)
-                        .aspectRatio(contentMode: .fit)
-                        .padding(.leading, 10)
-                    
-                    Text("\(rating) \(ratingName)")
-                        .font(.system(size: 16, weight: .medium))
-                        .foregroundStyle(.mark)
-                }
-            }
-            .frame(width: 159, height: 29)
+        Text("\(content)")
+            .font(.system(size: 16, weight: .medium))
+            .foregroundStyle(foregroundColor)
+            .padding(.horizontal, 10)
+            .background(backlgroundColor)
             .cornerRadius(5)
-            
-            Spacer()
-        }
     }
 }
 

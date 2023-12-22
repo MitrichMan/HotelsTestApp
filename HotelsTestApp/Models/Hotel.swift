@@ -25,3 +25,22 @@ struct Hotel: Decodable {
     let fuelCharge: Int
     let serviceCharge: Int
 }
+
+struct Rooms: Decodable {
+    let rooms: [Room]
+}
+
+struct Room: Decodable {
+    let id: Int
+    let name: String
+    let price: Int
+    let pricePer: String
+    let peculiarities: [String]
+    let imageUrls: [String]
+}
+
+struct HotelButton {    
+    let title: String
+    let subTitle: String
+    let image: String
+}
