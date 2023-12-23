@@ -25,7 +25,7 @@ struct HotelView: View {
                                 
                                 BasicDataView(
                                     hotel: viewModel.hotel,
-                                    images: viewModel.images,
+                                    imageUrls: viewModel.hotel.imageUrls,
                                     totalPrice: viewModel.totalPrice
                                 )
                                 .padding(.horizontal, 16)
@@ -63,11 +63,8 @@ struct HotelView: View {
             
             
         }
-//        .task {
-//            await viewModel.fetchHotel()
-//        }
         .task {
-            await DataManager.shared.fetchHotel()
+            await viewModel.fetchHotel()
         }
     }
 }

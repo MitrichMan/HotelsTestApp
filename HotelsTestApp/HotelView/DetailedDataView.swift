@@ -24,7 +24,7 @@ struct DetailedDataView: View {
             
             PeculiaritiesTilesView()
             
-            Text("Отель VIP-класса с собственными гольф полями. Высокий уровнь сервиса. Рекомендуем для респектабельного отдыха. Отель принимает гостей от 18 лет!")
+            Text(hotel.aboutTheHotel.description)
                 .font(.system(size: 16))
             
             ButtonsView(buttons: buttons)
@@ -35,23 +35,35 @@ struct DetailedDataView: View {
 // MARK: Preview
 #Preview {
     DetailedDataView(
+        //            id: 0,
+        //            hotelName: "",
+        //            hotelAdress: "",
+        //            horating: 0,
+        //            ratingName: "",
+        //            departure: "",
+        //            arrivalCountry: "",
+        //            tourDateStart: "",
+        //            tourDateStop: "",
+        //            numberOfNights: 0,
+        //            room: "",
+        //            nutrition: "",
+        //            tourPrice: 0,
+        //            fuelCharge: 0,
+        //            serviceCharge: 0
         hotel: Hotel(
-            id: 0,
-            hotelName: "",
-            hotelAdress: "",
-            horating: 0,
+            id: 1,
+            name: "",
+            adress: "",
+            minimalPrice: 1,
+            priceForIt: "",
+            rating: 1,
             ratingName: "",
-            departure: "",
-            arrivalCountry: "",
-            tourDateStart: "",
-            tourDateStop: "",
-            numberOfNights: 0,
-            room: "",
-            nutrition: "",
-            tourPrice: 0,
-            fuelCharge: 0,
-            serviceCharge: 0
-        ), 
+            imageUrls: [],
+            aboutTheHotel: AboutTheHotel(
+                description: "",
+                peculiarities: []
+            )
+        ),
         buttons: DataManager.shared.buttons
     )
 }

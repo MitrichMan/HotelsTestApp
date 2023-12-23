@@ -11,22 +11,35 @@ import Combine
 class DataManager: ObservableObject {
     static let shared = DataManager()
     
+    //        id: 0,
+    //        hotelName: "",
+    //        hotelAdress: "",
+    //        horating: 0,
+    //        ratingName: "",
+    //        departure: "",
+    //        arrivalCountry: "",
+    //        tourDateStart: "",
+    //        tourDateStop: "",
+    //        numberOfNights: 0,
+    //        room: "",
+    //        nutrition: "",
+    //        tourPrice: 0,
+    //        fuelCharge: 0,
+    //        serviceCharge: 0
+    
     @Published var hotel = Hotel(
-        id: 0,
-        hotelName: "",
-        hotelAdress: "",
-        horating: 0,
+        id: 1,
+        name: "",
+        adress: "",
+        minimalPrice: 1,
+        priceForIt: "",
+        rating: 1,
         ratingName: "",
-        departure: "",
-        arrivalCountry: "",
-        tourDateStart: "",
-        tourDateStop: "",
-        numberOfNights: 0,
-        room: "",
-        nutrition: "",
-        tourPrice: 0,
-        fuelCharge: 0,
-        serviceCharge: 0
+        imageUrls: [],
+        aboutTheHotel: AboutTheHotel(
+            description: "",
+            peculiarities: []
+        )
     ) {
         didSet {
             objectWillChange.send()

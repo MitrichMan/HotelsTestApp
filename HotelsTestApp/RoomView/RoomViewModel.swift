@@ -18,15 +18,4 @@ class RoomViewModel: ObservableObject {
             print(error)
         }
     }
-    
-    func fetchImages(from urls: [String])  {
-        do {
-            for url in urls {
-                let roomImage = try NetworkManager.shared.fetchImageData(from: url)
-                roomImages.append(roomImage)
-            }
-        } catch {
-            print(error)
-        }
-    }
 }

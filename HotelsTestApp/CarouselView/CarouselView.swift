@@ -8,25 +8,53 @@
 import SwiftUI
 
 struct CarouselView: View {
+    @StateObject private var viewModel = CarouselViewModel()
     
-    let images: [String]
-
+    var imageUrls: [String]
+    
     var body: some View {
-        TabView {
-            ForEach((0...images.count - 1), id: \.self) { index in
-                Image(images[index])
+        if viewModel.imagesAreFetched {
+            TabView {
+                ForEach(viewModel.images, id: \.self) { image in
+                    Image(uiImage: image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                }
+            }
+            .id(viewModel.images.count)
+            .tabViewStyle(PageTabViewStyle())
+            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+            .frame(height: 257)
+            .cornerRadius(15)
+            
+            .onChange(of: imageUrls) {
+                viewModel.fetchImages(from: imageUrls)
+            }
+            
+        } else {
+            ZStack{
+                Color(.background)
+                Image(systemName: "photo.fill")
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 50, height: 50)
+                    .foregroundColor(.gray)
+            }
+            .frame(height: 257)
+            .cornerRadius(15)
+            
+            .onChange(of: imageUrls) {
+                viewModel.fetchImages(from: imageUrls)
             }
         }
-        .tabViewStyle(PageTabViewStyle())
-        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-        .frame(height: 257)
-        .cornerRadius(15)
+    }
+    
+    func getNumberOfElements() -> Int {
+        if viewModel.images.count > 1 {
+            return viewModel.images.count
+        } else { return 1 }
     }
 }
 
 #Preview {
-    CarouselView(images: DataManager.shared.images)
+    CarouselView(imageUrls: ["https://deluxe.voyage/useruploads/articles/article_1eb0a64d00.jpg"])
 }
-

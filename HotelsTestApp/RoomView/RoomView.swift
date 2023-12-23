@@ -29,22 +29,34 @@ struct RoomView: View {
         )]
     
     
+    //        id: 1,
+    //        hotelName: "Name",
+    //        hotelAdress: "Adress",
+    //        horating: 2,
+    //        ratingName: "ratingName",
+    //        departure: "departure",
+    //        arrivalCountry: "arrivalCountry",
+    //        tourDateStart: "tourDateStart",
+    //        tourDateStop: "tourDateStop",
+    //        numberOfNights: 3,
+    //        room: "room",
+    //        nutrition: "nutrition",
+    //        tourPrice: 4,
+    //        fuelCharge: 5,
+    //        serviceCharge: 6
     let mokHotel = Hotel(
         id: 1,
-        hotelName: "Name",
-        hotelAdress: "Adress",
-        horating: 2,
-        ratingName: "ratingName",
-        departure: "departure",
-        arrivalCountry: "arrivalCountry",
-        tourDateStart: "tourDateStart",
-        tourDateStop: "tourDateStop",
-        numberOfNights: 3,
-        room: "room",
-        nutrition: "nutrition",
-        tourPrice: 4,
-        fuelCharge: 5,
-        serviceCharge: 6
+        name: "",
+        adress: "",
+        minimalPrice: 1,
+        priceForIt: "",
+        rating: 1,
+        ratingName: "",
+        imageUrls: [],
+        aboutTheHotel: AboutTheHotel(
+            description: "",
+            peculiarities: []
+        )
     )
     
     var body: some View {
@@ -53,11 +65,11 @@ struct RoomView: View {
                 Color("Background")
                 
                 VStack {
-                    CarouselView(images: mokRooms[0].imageUrls)
+                    CarouselView(imageUrls: [])
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle(mokHotel.hotelName)
+            .navigationTitle(mokHotel.name)
         }
         
         .task {
@@ -67,21 +79,33 @@ struct RoomView: View {
 }
 
 #Preview {
+    //        id: 0,
+    //        hotelName: "",
+    //        hotelAdress: "",
+    //        horating: 0,
+    //        ratingName: "",
+    //        departure: "",
+    //        arrivalCountry: "",
+    //        tourDateStart: "",
+    //        tourDateStop: "",
+    //        numberOfNights: 0,
+    //        room: "",
+    //        nutrition: "",
+    //        tourPrice: 0,
+    //        fuelCharge: 0,
+    //        serviceCharge: 0
     RoomView(hotel: Hotel(
-        id: 0,
-        hotelName: "",
-        hotelAdress: "",
-        horating: 0,
+        id: 1,
+        name: "",
+        adress: "",
+        minimalPrice: 1,
+        priceForIt: "",
+        rating: 1,
         ratingName: "",
-        departure: "",
-        arrivalCountry: "",
-        tourDateStart: "",
-        tourDateStop: "",
-        numberOfNights: 0,
-        room: "",
-        nutrition: "",
-        tourPrice: 0,
-        fuelCharge: 0,
-        serviceCharge: 0
+        imageUrls: [],
+        aboutTheHotel: AboutTheHotel(
+            description: "",
+            peculiarities: []
+        )
     ))
 }

@@ -8,7 +8,24 @@
 import Foundation
 
 struct Hotel: Decodable {
+    
+    let id: Int
+    let name: String
+    let adress: String
+    let minimalPrice: Int
+    let priceForIt: String
+    let rating: Int
+    let ratingName: String
+    let imageUrls: [String]
+    let aboutTheHotel: AboutTheHotel
+}
 
+struct AboutTheHotel: Decodable {
+    let description: String
+    let peculiarities: [String]
+}
+
+struct BookingData: Decodable {
     let id: Int
     let hotelName: String
     let hotelAdress: String
@@ -16,8 +33,8 @@ struct Hotel: Decodable {
     let ratingName: String
     let departure: String
     let arrivalCountry: String
-    let tourDateStart: String //Date?
-    let tourDateStop: String //Date?
+    let tourDateStart: String
+    let tourDateStop: String
     let numberOfNights: Int
     let room: String
     let nutrition: String

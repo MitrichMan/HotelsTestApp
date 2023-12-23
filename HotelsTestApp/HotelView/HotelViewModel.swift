@@ -6,38 +6,49 @@
 //
 
 import Foundation
-import SwiftUI
+import Combine
 
 class HotelViewModel: ObservableObject {
     
+    //        id: 0,
+    //        hotelName: "",
+    //        hotelAdress: "",
+    //        horating: 0,
+    //        ratingName: "",
+    //        departure: "",
+    //        arrivalCountry: "",
+    //        tourDateStart: "",
+    //        tourDateStop: "",
+    //        numberOfNights: 0,
+    //        room: "",
+    //        nutrition: "",
+    //        tourPrice: 0,
+    //        fuelCharge: 0,
+    //        serviceCharge: 0
+    
     @Published var hotel = Hotel(
-        id: 0,
-        hotelName: "",
-        hotelAdress: "",
-        horating: 0,
+        id: 1,
+        name: "",
+        adress: "",
+        minimalPrice: 1,
+        priceForIt: "",
+        rating: 1,
         ratingName: "",
-        departure: "",
-        arrivalCountry: "",
-        tourDateStart: "",
-        tourDateStop: "",
-        numberOfNights: 0,
-        room: "",
-        nutrition: "",
-        tourPrice: 0,
-        fuelCharge: 0,
-        serviceCharge: 0
+        imageUrls: [],
+        aboutTheHotel: AboutTheHotel(
+            description: "",
+            peculiarities: []
+        )
     ) {
         didSet {
-            calculateTotalPrice()
+            objectWillChange.send()
         }
     }
     
     var totalPrice = 0
     
     var images = DataManager.shared.images
-        
-//    @Published var buttons = DataManager.shared.buttons
-    
+            
     var buttons = [
         HotelButton(
             title: "Удобства",
@@ -56,15 +67,13 @@ class HotelViewModel: ObservableObject {
         )
     ]
     
+    let objectWillChange = ObservableObjectPublisher()
+    
     @MainActor func fetchHotel() async {
         do {
             hotel = try await NetworkManager.shared.fetchHotel()
         } catch {
             print(error)
         }
-    }
-    
-    private func calculateTotalPrice() {
-        totalPrice = hotel.tourPrice + hotel.fuelCharge + hotel.serviceCharge
     }
 }

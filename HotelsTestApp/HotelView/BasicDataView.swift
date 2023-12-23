@@ -6,25 +6,29 @@
 //
 
 import SwiftUI
+import Combine
 
 struct BasicDataView: View {
     
     var hotel: Hotel
-    var images: [String]
+    var imageUrls: [String] {
+        didSet {
+            objectWillChange.send()
+        }
+    }
     var totalPrice: Int
+    
+    let objectWillChange = ObservableObjectPublisher()
     
     var body: some View {
         VStack(spacing: 8) {
             
-//            Text("Отель")
-//                .font(.system(size: 18, weight: .medium))
-//            
-            CarouselView(images: images)
+            CarouselView(imageUrls: imageUrls)
                 .padding(.bottom, 8)
             
             HStack {
                 TileView(
-                    content: "★ \(hotel.horating) \(hotel.ratingName)",
+                    content: "★ \(hotel.rating) \(hotel.ratingName)",
                     foregroundColor: .mark,
                     backlgroundColor: .markBackground
                 )
@@ -33,7 +37,7 @@ struct BasicDataView: View {
             }
             
             HStack {
-                Text(hotel.hotelName)
+                Text(hotel.name)
                     .font(.system(size: 22, weight: .medium))
                     .frame(height: 26, alignment: .leading)
                 
@@ -41,7 +45,7 @@ struct BasicDataView: View {
             }
             
             HStack {
-                Text(hotel.hotelAdress)
+                Text(hotel.adress)
                     .font(.system(size: 14, weight: .medium))
                     .frame(height: 26, alignment: .leading)
                     .foregroundStyle(.blue)
@@ -51,13 +55,13 @@ struct BasicDataView: View {
             
             
             HStack(alignment: .bottom){
-                Text("От \(totalPrice) ₽")
+                Text("От \(hotel.minimalPrice) ₽")
                     .font(.system(size: 30, weight: .semibold))
                     .frame(alignment: .leading)
                 
                 Spacer()
                 
-                Text("за тур с перелетом")
+                Text(hotel.priceForIt)
                     .font(.system(size: 16, weight: .medium))
                     .foregroundStyle(.gray)
                     .frame(alignment: .trailing)
@@ -69,30 +73,46 @@ struct BasicDataView: View {
 
 #Preview {
     BasicDataView(
+        
+//            id: 0,
+//            hotelName: "",
+//            hotelAdress: "",
+//            horating: 0,
+//            ratingName: "",
+//            departure: "",
+//            arrivalCountry: "",
+//            tourDateStart: "",
+//            tourDateStop: "",
+//            numberOfNights: 0,
+//            room: "",
+//            nutrition: "",
+//            tourPrice: 0,
+//            fuelCharge: 0,
+//            serviceCharge: 0
+//
         hotel: Hotel(
-            id: 0,
-            hotelName: "",
-            hotelAdress: "",
-            horating: 0,
+            id: 1,
+            name: "",
+            adress: "",
+            minimalPrice: 1,
+            priceForIt: "",
+            rating: 1,
             ratingName: "",
-            departure: "",
-            arrivalCountry: "",
-            tourDateStart: "",
-            tourDateStop: "",
-            numberOfNights: 0,
-            room: "",
-            nutrition: "",
-            tourPrice: 0,
-            fuelCharge: 0,
-            serviceCharge: 0
-        ),
-        images: [
+            imageUrls: [],
+            aboutTheHotel: AboutTheHotel(
+                description: "", 
+                peculiarities: []
+            )
+        )
+        ,
+        imageUrls: [
             "Image1",
             "Image2",
             "Image3",
             "Image4",
             "Image5"
-        ], totalPrice: 100
+        ],
+        totalPrice: 100
     )
 }
 
@@ -112,3 +132,18 @@ struct TileView: View {
     }
 }
 
+enum ImageSource {
+    case string(String)
+    case data(Data)
+}
+
+//extension Image {
+//    init(source: ImageSource) {
+//        switch source {
+//        case let .data(data):
+//            self = Image(data)
+//        case let .string(string):
+//            self = Image(string)
+//        }
+//    }
+//}
