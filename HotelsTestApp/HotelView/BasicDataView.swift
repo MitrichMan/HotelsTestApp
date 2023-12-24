@@ -30,7 +30,8 @@ struct BasicDataView: View {
                 TileView(
                     content: "★ \(hotel.rating) \(hotel.ratingName)",
                     foregroundColor: .mark,
-                    backlgroundColor: .markBackground
+                    backlgroundColor: .markBackground, 
+                    textSize: 16
                 )
                 
                 Spacer()
@@ -121,29 +122,15 @@ struct TileView: View {
     let content: String
     let foregroundColor: Color
     let backlgroundColor: Color
+    let textSize: CGFloat
     
     var body: some View {
         Text("\(content)")
-            .font(.system(size: 16, weight: .medium))
+            .font(.system(size: textSize, weight: .medium))
             .foregroundStyle(foregroundColor)
             .padding(.horizontal, 10)
             .background(backlgroundColor)
             .cornerRadius(5)
+            .frame(alignment: .leading)
     }
 }
-
-enum ImageSource {
-    case string(String)
-    case data(Data)
-}
-
-//extension Image {
-//    init(source: ImageSource) {
-//        switch source {
-//        case let .data(data):
-//            self = Image(data)
-//        case let .string(string):
-//            self = Image(string)
-//        }
-//    }
-//}

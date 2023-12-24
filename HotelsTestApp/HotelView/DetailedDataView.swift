@@ -10,25 +10,28 @@ import SwiftUI
 struct DetailedDataView: View {
     
     let hotel: Hotel
+    let width: CGFloat
 
     let buttons: [HotelButton]
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 16){
-            HStack {
-                Text("Об отеле")
-                    .font(.system(size: 22, weight: .medium))
+//        GeometryReader { geometry in
+            VStack(alignment: .leading, spacing: 16){
+                HStack {
+                    Text("Об отеле")
+                        .font(.system(size: 22, weight: .medium))
+                    
+                    Spacer()
+                }
                 
-                Spacer()
+                PeculiaritiesTilesView(hotel: hotel, width: width)
+                
+                Text(hotel.aboutTheHotel.description)
+                    .font(.system(size: 16))
+                
+                ButtonsView(buttons: buttons)
             }
-            
-            PeculiaritiesTilesView()
-            
-            Text(hotel.aboutTheHotel.description)
-                .font(.system(size: 16))
-            
-            ButtonsView(buttons: buttons)
-        }
+//        }
     }
 }
 
@@ -63,7 +66,7 @@ struct DetailedDataView: View {
                 description: "",
                 peculiarities: []
             )
-        ),
+        ), width: 250,
         buttons: DataManager.shared.buttons
     )
 }
@@ -125,38 +128,34 @@ struct ListRowView: View {
 
 // MARK: PeculiaritiesTilesView
 struct PeculiaritiesTilesView: View {
+    
+    var hotel: Hotel
+    let width: CGFloat
+    
     let foregroundColor = Color(.peculiarities)
     let backgroundColor = Color(.peculiaritiesBackground)
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                TileView(
-                    content: "3-я линия",
-                    foregroundColor: foregroundColor,
-                    backlgroundColor: backgroundColor
-                )
-                
-                TileView(
-                    content: "Платный Wi-Fi в фойе",
-                    foregroundColor: foregroundColor,
-                    backlgroundColor: backgroundColor
-                )
+        LazyVGrid(
+            columns: [
+                GridItem(.flexible(minimum: 0, maximum: width - 32)),
+                GridItem(.flexible(minimum: 0, maximum: width - 32))
+            ],
+            alignment: .leading,
+            spacing: 8,
+            content: {
+                ForEach(hotel.aboutTheHotel.peculiarities, id: \.self) { peculiarity in
+                    
+                    TileView(
+                        content: peculiarity,
+                        foregroundColor: foregroundColor,
+                        backlgroundColor: backgroundColor,
+                        textSize: 16
+                    )
+                    .frame(minWidth: 0, maxWidth: width / 2 - 20)
+                    .fixedSize(horizontal: true, vertical: false)
+                }
             }
-            
-            HStack {
-                TileView(
-                    content: "30 км до аэропорта",
-                    foregroundColor: foregroundColor,
-                    backlgroundColor: backgroundColor
-                )
-                
-                TileView(
-                    content: "1 км до пляжа",
-                    foregroundColor: foregroundColor,
-                    backlgroundColor: backgroundColor
-                )
-            }
-        }
+        )
     }
 }

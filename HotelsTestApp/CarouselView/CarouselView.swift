@@ -34,10 +34,8 @@ struct CarouselView: View {
         } else {
             ZStack{
                 Color(.background)
-                Image(systemName: "photo.fill")
-                    .resizable()
-                    .frame(width: 50, height: 50)
-                    .foregroundColor(.gray)
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
             }
             .frame(height: 257)
             .cornerRadius(15)

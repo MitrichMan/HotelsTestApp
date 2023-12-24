@@ -12,59 +12,63 @@ struct HotelView: View {
     
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                Color("Background")
-                
-                VStack {
-                    ScrollView(.vertical) {
-                        VStack(spacing: 8) {
-                            
-                            ZStack {
-                                Color(.white)
+        GeometryReader { geometry in
+            NavigationView {
+                ZStack {
+                    Color("Background")
+                    
+                    VStack {
+                        ScrollView(.vertical) {
+                            VStack(spacing: 8) {
                                 
-                                BasicDataView(
-                                    hotel: viewModel.hotel,
-                                    imageUrls: viewModel.hotel.imageUrls,
-                                    totalPrice: viewModel.totalPrice
+                                ZStack {
+                                    Color(.white)
+                                    
+                                    BasicDataView(
+                                        hotel: viewModel.hotel,
+                                        imageUrls: viewModel.hotel.imageUrls,
+                                        totalPrice: viewModel.hotel.minimalPrice
+                                    )
+                                    .padding(.horizontal, 16)
+                                    .padding(.bottom)
+                                }
+                                .clipShape(
+                                    .rect(
+                                        topLeadingRadius: 0,
+                                        bottomLeadingRadius: 12,
+                                        bottomTrailingRadius: 12,
+                                        topTrailingRadius: 0
+                                    )
                                 )
-                                .padding(.horizontal, 16)
-                                .padding(.bottom)
+                                
+                                ZStack {
+                                    Color(.white)
+                                    DetailedDataView(
+                                        hotel: viewModel.hotel,
+                                        width: geometry.size.width,
+                                        buttons: viewModel.buttons
+                                    )
+                                    .padding()
+                                }
+                                .cornerRadius(12)
+                                
                             }
-                            .clipShape(
-                                .rect(
-                                    topLeadingRadius: 0,
-                                    bottomLeadingRadius: 12,
-                                    bottomTrailingRadius: 12,
-                                    topTrailingRadius: 0
-                                )
-                            )
-                            
-                            ZStack {
-                                Color(.white)
-                                DetailedDataView(
-                                    hotel: viewModel.hotel,
-                                    buttons: DataManager.shared.buttons
-                                )
-                                .padding()
-                            }
-                            .cornerRadius(12)
-                            
                         }
+                        
+                        GoToRoomSelectionButtonView(hotel: viewModel.hotel)
+                            .padding(.horizontal, 16)
                     }
                     
-                    GoToRoomSelectionButtonView(hotel: viewModel.hotel)
-                        .padding(.horizontal, 16)
                 }
+                .navigationBarTitle("Отель")
+                .navigationBarTitleDisplayMode(.inline)
+                
                 
             }
-            .navigationBarTitle("Отель")
-            .navigationBarTitleDisplayMode(.inline)
-            
-            
-        }
-        .task {
-            await viewModel.fetchHotel()
+            .task {
+                await viewModel.fetchHotel()
+                await DataManager.shared.fetchHotel()
+            }
         }
     }
 }
@@ -74,12 +78,13 @@ struct HotelView: View {
 }
 
 struct GoToRoomSelectionButtonView: View {
-//    let rooms: Rooms
+    //    let rooms: Rooms
     let hotel: Hotel
+    
+    
     var body: some View {
         NavigationLink {
-            RoomView(hotel: hotel)
-            
+            RoomsView(hotel: hotel, index: 0)
         } label: {
             HStack {
                 Spacer()
@@ -87,7 +92,6 @@ struct GoToRoomSelectionButtonView: View {
                 Text("К выбору номера")
                     .font(.system(size: 16, weight: .medium))
                     .foregroundColor(.white)
-                
                 Spacer()
             }
         }

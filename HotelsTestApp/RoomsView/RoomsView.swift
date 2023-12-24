@@ -1,15 +1,36 @@
 //
-//  HotelViewModel.swift
+//  RoomsView.swift
 //  HotelsTestApp
 //
 //  Created by Dmitrii Melnikov on 19.12.2023.
 //
 
-import Foundation
-import Combine
+import SwiftUI
 
-class HotelViewModel: ObservableObject {
+struct RoomsView: View {
+    @StateObject private var viewModel = RoomsViewModel()
     
+    let hotel: Hotel
+    
+    let index: Int
+    
+    var body: some View {
+        NavigationView {
+            ZStack {
+                Color("Background")
+                
+                Text("\(viewModel.rooms.rooms.count)")
+            }
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle(hotel.name)
+        .task {
+            await viewModel.fetchRooms()
+        }
+    }
+}
+
+#Preview {
     //        id: 0,
     //        hotelName: "",
     //        hotelAdress: "",
@@ -25,12 +46,11 @@ class HotelViewModel: ObservableObject {
     //        tourPrice: 0,
     //        fuelCharge: 0,
     //        serviceCharge: 0
-    
-    @Published var hotel = Hotel(
+    RoomsView(hotel: Hotel(
         id: 1,
         name: "",
         adress: "",
-        minimalPrice: 0,
+        minimalPrice: 1,
         priceForIt: "",
         rating: 1,
         ratingName: "",
@@ -39,23 +59,5 @@ class HotelViewModel: ObservableObject {
             description: "",
             peculiarities: []
         )
-    ) {
-        didSet {
-            objectWillChange.send()
-        }
-    }
-    @Published var tabBarHeight: CGFloat = 0
-
-    
-    let buttons = DataManager.shared.buttons
-        
-    let objectWillChange = ObservableObjectPublisher()
-    
-    @MainActor func fetchHotel() async {
-        do {
-            hotel = try await NetworkManager.shared.fetchHotel()
-        } catch {
-            print(error)
-        }
-    }
+    ), index: 0)
 }

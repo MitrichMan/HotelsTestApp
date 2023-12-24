@@ -6,10 +6,20 @@
 //
 
 import Foundation
+import Combine
 
-class RoomViewModel: ObservableObject {
-    @Published var rooms = Rooms(rooms: [])
+class RoomsViewModel: ObservableObject {
+    @Published var rooms = Rooms(rooms: []) {
+        didSet {
+            print(rooms.rooms.count)
+            objectWillChange.send()
+        }
+    }
+    
+    
     @Published var roomImages: [Data] = []
+    
+    let objectWillChange = ObservableObjectPublisher()
     
     @MainActor func fetchRooms() async {
         do {

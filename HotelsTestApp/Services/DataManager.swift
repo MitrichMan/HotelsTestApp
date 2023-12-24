@@ -11,22 +11,6 @@ import Combine
 class DataManager: ObservableObject {
     static let shared = DataManager()
     
-    //        id: 0,
-    //        hotelName: "",
-    //        hotelAdress: "",
-    //        horating: 0,
-    //        ratingName: "",
-    //        departure: "",
-    //        arrivalCountry: "",
-    //        tourDateStart: "",
-    //        tourDateStop: "",
-    //        numberOfNights: 0,
-    //        room: "",
-    //        nutrition: "",
-    //        tourPrice: 0,
-    //        fuelCharge: 0,
-    //        serviceCharge: 0
-    
     @Published var hotel = Hotel(
         id: 1,
         name: "",
@@ -46,7 +30,23 @@ class DataManager: ObservableObject {
         }
     }
     
-    let images = ["Image1", "Image2", "Image3", "Image4", "Image5"]
+    @Published var bookingData = BookingData(
+        id: 0,
+        hotelName: "",
+        hotelAdress: "",
+        horating: 0,
+        ratingName: "",
+        departure: "",
+        arrivalCountry: "",
+        tourDateStart: "",
+        tourDateStop: "",
+        numberOfNights: 0,
+        room: "",
+        nutrition: "",
+        tourPrice: 0,
+        fuelCharge: 0,
+        serviceCharge: 0
+    )
     
     var buttons = [
         HotelButton(
