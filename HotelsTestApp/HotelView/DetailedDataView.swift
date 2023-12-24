@@ -24,7 +24,9 @@ struct DetailedDataView: View {
                     Spacer()
                 }
                 
-                PeculiaritiesTilesView(hotel: hotel, width: width)
+                PeculiaritiesTilesView(
+                    peculiarities: hotel.aboutTheHotel.peculiarities
+                )
                 
                 Text(hotel.aboutTheHotel.description)
                     .font(.system(size: 16))
@@ -128,34 +130,42 @@ struct ListRowView: View {
 
 // MARK: PeculiaritiesTilesView
 struct PeculiaritiesTilesView: View {
-    
-    var hotel: Hotel
-    let width: CGFloat
-    
+    var peculiarities: [String]
     let foregroundColor = Color(.peculiarities)
     let backgroundColor = Color(.peculiaritiesBackground)
     
     var body: some View {
-        LazyVGrid(
-            columns: [
-                GridItem(.flexible(minimum: 0, maximum: width - 32)),
-                GridItem(.flexible(minimum: 0, maximum: width - 32))
-            ],
-            alignment: .leading,
-            spacing: 8,
-            content: {
-                ForEach(hotel.aboutTheHotel.peculiarities, id: \.self) { peculiarity in
-                    
-                    TileView(
-                        content: peculiarity,
-                        foregroundColor: foregroundColor,
-                        backlgroundColor: backgroundColor,
-                        textSize: 16
+        GeometryReader { geometry in
+            LazyVGrid(
+                columns: [
+                    GridItem(.flexible(
+                        minimum: 0,
+                        maximum: geometry.size.width - 32)
+                    ),
+                    GridItem(.flexible(
+                        minimum: 0,
+                        maximum: geometry.size.width - 32)
                     )
-                    .frame(minWidth: 0, maxWidth: width / 2 - 20)
-                    .fixedSize(horizontal: true, vertical: false)
+                ],
+                alignment: .leading,
+                spacing: 8,
+                content: {
+                    ForEach(peculiarities, id: \.self) { peculiarity in
+                        
+                        TileView(
+                            content: peculiarity,
+                            foregroundColor: foregroundColor,
+                            backlgroundColor: backgroundColor,
+                            textSize: 16
+                        )
+                        .frame(
+                            minWidth: 0,
+                            maxWidth: geometry.size.width / 2 - 20
+                        )
+                        .fixedSize(horizontal: true, vertical: false)
+                    }
                 }
-            }
-        )
+            )
+        }
     }
 }

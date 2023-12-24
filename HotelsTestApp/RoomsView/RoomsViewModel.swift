@@ -9,16 +9,29 @@ import Foundation
 import Combine
 
 class RoomsViewModel: ObservableObject {
-    @Published var rooms = Rooms(rooms: []) {
+    
+//    let aboutTheRoomsForegroundColor = Color(.aboutTheRoomsForeground)
+//    let aboutTheRoomsBackgroundColor = Color(.aboutTheRoomsBackground)
+    
+    var rooms = Rooms(rooms: [Room(
+        id: 1,
+        name: "",
+        price: 1,
+        pricePer: "",
+        peculiarities: [],
+        imageUrls: []
+    )]) {
         didSet {
-            print(rooms.rooms.count)
             objectWillChange.send()
         }
     }
     
-    
-    @Published var roomImages: [Data] = []
-    
+//    var rooms = Rooms(rooms: []) {
+//        didSet {
+//            objectWillChange.send()
+//        }
+//    }
+        
     let objectWillChange = ObservableObjectPublisher()
     
     @MainActor func fetchRooms() async {

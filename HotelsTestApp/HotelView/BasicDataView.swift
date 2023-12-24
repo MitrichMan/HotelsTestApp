@@ -11,27 +11,20 @@ import Combine
 struct BasicDataView: View {
     
     var hotel: Hotel
-    var imageUrls: [String] {
-        didSet {
-            objectWillChange.send()
-        }
-    }
-    var totalPrice: Int
     
     let objectWillChange = ObservableObjectPublisher()
     
     var body: some View {
         VStack(spacing: 8) {
             
-            CarouselView(imageUrls: imageUrls)
+            CarouselView(imageUrls: hotel.imageUrls)
                 .padding(.bottom, 8)
             
             HStack {
                 TileView(
                     content: "★ \(hotel.rating) \(hotel.ratingName)",
                     foregroundColor: .mark,
-                    backlgroundColor: .markBackground, 
-                    textSize: 16
+                    backlgroundColor: .markBackground
                 )
                 
                 Spacer()
@@ -105,15 +98,6 @@ struct BasicDataView: View {
                 peculiarities: []
             )
         )
-        ,
-        imageUrls: [
-            "Image1",
-            "Image2",
-            "Image3",
-            "Image4",
-            "Image5"
-        ],
-        totalPrice: 100
     )
 }
 
@@ -122,11 +106,10 @@ struct TileView: View {
     let content: String
     let foregroundColor: Color
     let backlgroundColor: Color
-    let textSize: CGFloat
     
     var body: some View {
         Text("\(content)")
-            .font(.system(size: textSize, weight: .medium))
+            .font(.system(size: 16, weight: .medium))
             .foregroundStyle(foregroundColor)
             .padding(.horizontal, 10)
             .background(backlgroundColor)

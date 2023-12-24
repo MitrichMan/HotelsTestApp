@@ -11,16 +11,7 @@ import Combine
 
 class CarouselViewModel: ObservableObject {
     
-    @Published var images: [UIImage] = []
-    
-    @Published var count = 0 {
-        didSet {
-            imagesAreFetched = true
-            objectWillChange.send()
-        }
-    }
-    
-    @Published var imagesAreFetched = false {
+    var images: [UIImage] = [] {
         didSet {
             objectWillChange.send()
         }
@@ -30,13 +21,13 @@ class CarouselViewModel: ObservableObject {
     
     @MainActor func fetchImages(from urls: [String]) {
         Task {
-            var fetchedImages: [UIImage] = []
+//            var fetchedImages: [UIImage] = []
             for url in urls {
-                guard let image = await fetchImage(from: url) else { return }
-                fetchedImages.append(image)
+                guard let image = await fetchImage(from: url) else { continue }
+//                fetchedImages.append(image)
+                images.append(image)
             }
-            images = fetchedImages
-            count = images.count
+//            images = fetchedImages
         }
     }
     

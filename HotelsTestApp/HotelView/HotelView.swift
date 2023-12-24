@@ -25,12 +25,11 @@ struct HotelView: View {
                                     Color(.white)
                                     
                                     BasicDataView(
-                                        hotel: viewModel.hotel,
-                                        imageUrls: viewModel.hotel.imageUrls,
-                                        totalPrice: viewModel.hotel.minimalPrice
+                                        hotel: viewModel.hotel
                                     )
                                     .padding(.horizontal, 16)
                                     .padding(.bottom)
+                                    
                                 }
                                 .clipShape(
                                     .rect(
@@ -51,7 +50,6 @@ struct HotelView: View {
                                     .padding()
                                 }
                                 .cornerRadius(12)
-                                
                             }
                         }
                         
@@ -67,7 +65,6 @@ struct HotelView: View {
             }
             .task {
                 await viewModel.fetchHotel()
-                await DataManager.shared.fetchHotel()
             }
         }
     }
@@ -78,13 +75,11 @@ struct HotelView: View {
 }
 
 struct GoToRoomSelectionButtonView: View {
-    //    let rooms: Rooms
     let hotel: Hotel
-    
     
     var body: some View {
         NavigationLink {
-            RoomsView(hotel: hotel, index: 0)
+            RoomsView(hotel: hotel)
         } label: {
             HStack {
                 Spacer()

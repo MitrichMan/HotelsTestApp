@@ -26,7 +26,7 @@ class HotelViewModel: ObservableObject {
     //        fuelCharge: 0,
     //        serviceCharge: 0
     
-    @Published var hotel = Hotel(
+    var hotel = Hotel(
         id: 1,
         name: "",
         adress: "",
@@ -44,8 +44,6 @@ class HotelViewModel: ObservableObject {
             objectWillChange.send()
         }
     }
-    @Published var tabBarHeight: CGFloat = 0
-
     
     let buttons = DataManager.shared.buttons
         

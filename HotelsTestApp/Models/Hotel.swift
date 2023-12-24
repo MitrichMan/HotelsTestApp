@@ -47,7 +47,7 @@ struct Rooms: Decodable {
     let rooms: [Room]
 }
 
-struct Room: Decodable {
+struct Room: Decodable, Hashable {
     let id: Int
     let name: String
     let price: Int

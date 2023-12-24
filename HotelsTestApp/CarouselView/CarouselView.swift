@@ -13,7 +13,7 @@ struct CarouselView: View {
     var imageUrls: [String]
     
     var body: some View {
-        if viewModel.imagesAreFetched {
+        if !viewModel.images.isEmpty {
             TabView {
                 ForEach(viewModel.images, id: \.self) { image in
                     Image(uiImage: image)
@@ -24,6 +24,7 @@ struct CarouselView: View {
             .id(viewModel.images.count)
             .tabViewStyle(PageTabViewStyle())
             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+            
             .frame(height: 257)
             .cornerRadius(15)
             
@@ -40,6 +41,7 @@ struct CarouselView: View {
             .frame(height: 257)
             .cornerRadius(15)
             
+            .onAppear(perform:  {viewModel.fetchImages(from: imageUrls) })
             .onChange(of: imageUrls) {
                 viewModel.fetchImages(from: imageUrls)
             }
@@ -54,5 +56,7 @@ struct CarouselView: View {
 }
 
 #Preview {
-    CarouselView(imageUrls: ["https://deluxe.voyage/useruploads/articles/article_1eb0a64d00.jpg"])
+    CarouselView(imageUrls: [
+        "https://deluxe.voyage/useruploads/articles/article_1eb0a64d00.jpg"
+    ])
 }
