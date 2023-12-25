@@ -35,14 +35,18 @@ class DataManager: ObservableObject {
         email: "examplemail.000@mail.ru"
     )
     
-    var tourists: [Tourist] = [Tourist(
+    @Published var tourists: [Tourist] = [Tourist(
         name: "",
         lastName: "",
         dateOfBirth: "",
         citizenship: "",
         passportNumber: "",
         passportExpirationDate: ""
-    )]
+    )] {
+        didSet {
+            objectWillChange.send()
+        }
+    }
     
     let bookingDataNames: [BookingDataFieldName] = [
         .departure,

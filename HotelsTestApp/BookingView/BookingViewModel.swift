@@ -32,7 +32,11 @@ class BookingViewModel: ObservableObject {
         }
     }
     
-    var tourists = DataManager.shared.tourists
+    @Published var tourists = DataManager.shared.tourists {
+        didSet {
+            objectWillChange.send()
+        }
+    }
     
     var customerData = DataManager.shared.customerData
     

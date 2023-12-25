@@ -11,7 +11,7 @@ struct RoomsView: View {
     @StateObject private var viewModel = RoomsViewModel()
         
     var body: some View {
-        NavigationStack {
+        NavigationView {
                 ZStack {
                     Color("Background")
                     ScrollView {
@@ -24,7 +24,6 @@ struct RoomsView: View {
                 }
             }
         }
-//        .navigationBarTitleDisplayMode(.inline)
         
         .task {
             await viewModel.fetchRooms()
