@@ -32,6 +32,10 @@ class BookingViewModel: ObservableObject {
         }
     }
     
+    var tourists = DataManager.shared.tourists
+    
+    var customerData = DataManager.shared.customerData
+    
     let objectWillChange = ObservableObjectPublisher()
     
     @MainActor func fetchBookingData() async {

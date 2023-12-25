@@ -48,13 +48,27 @@ struct Rooms: Decodable {
     let rooms: [Room]
 }
 
-struct Room: Decodable, Hashable {
+struct Room: Decodable {
     let id: Int
     let name: String
     let price: Int
     let pricePer: String
     let peculiarities: [String]
     let imageUrls: [String]
+}
+
+struct Tourist {
+    var name: String
+    var lastName: String
+    var dateOfBirth: String
+    var citizenship: String
+    var passportNumber: String
+    var passportExpirationDate: String
+}
+
+struct CustomerData {
+    var phone: String
+    var email: String
 }
 
 struct HotelButton {    

@@ -25,34 +25,7 @@ struct BasicDataView: View {
                 hotelName: hotel.name,
                 adress: hotel.adress
             )
-//            HStack {
-//                TileView(
-//                    content: Text("★ \(hotel.rating) \(hotel.ratingName)"),
-//                    foregroundColor: .mark,
-//                    backlgroundColor: .markBackground
-//                )
-//                
-//                Spacer()
-//            }
-//            
-//            HStack {
-//                Text(hotel.name)
-//                    .font(.system(size: 22, weight: .medium))
-//                    .frame(alignment: .leading)
-//                
-//                Spacer()
-//            }
-//            
-//            HStack {
-//                Text(hotel.adress)
-//                    .font(.system(size: 14, weight: .medium))
-//                    .frame(height: 26, alignment: .leading)
-//                    .foregroundStyle(.blue)
-//                
-//                Spacer()
-//            }
             .padding(.bottom, 8)
-            
             
             PriceView(
                 price: "От \(hotel.minimalPrice) ₽",
