@@ -27,7 +27,7 @@ class NetworkManager {
     }
     
     func fetchBookingData() async throws -> BookingData {
-        guard let url = URL(string: API.hotelApi.rawValue) else {
+        guard let url = URL(string: API.bookingDetailsApi.rawValue) else {
             throw NetworkError.invalidURL
         }
         let (data, _) = try await URLSession.shared.data(from: url)

@@ -41,6 +41,7 @@ struct BookingData: Decodable {
     let tourPrice: Int
     let fuelCharge: Int
     let serviceCharge: Int
+
 }
 
 struct Rooms: Decodable {

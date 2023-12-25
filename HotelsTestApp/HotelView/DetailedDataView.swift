@@ -11,50 +11,40 @@ struct DetailedDataView: View {
     
     let hotel: Hotel
     let width: CGFloat
-
+    
     let buttons: [HotelButton]
     
     var body: some View {
-//        GeometryReader { geometry in
-            VStack(alignment: .leading, spacing: 16){
-                HStack {
-                    Text("Об отеле")
-                        .font(.system(size: 22, weight: .medium))
-                    
-                    Spacer()
-                }
+        VStack(alignment: .leading, spacing: 16){
+            HStack {
+                Text("Об отеле")
+                    .font(.system(size: 22, weight: .medium))
                 
-                PeculiaritiesTilesView(
-                    peculiarities: hotel.aboutTheHotel.peculiarities
-                )
-                
-                Text(hotel.aboutTheHotel.description)
-                    .font(.system(size: 16))
-                
-                ButtonsView(buttons: buttons)
+                Spacer()
             }
-//        }
+            
+            PeculiaritiesTilesView(
+                peculiarities: hotel.aboutTheHotel.peculiarities,
+                foregroundColor: Color(.peculiarities),
+                backgroundColor: Color(.peculiaritiesBackground)
+            )
+            
+            .frame(
+                height:
+                    hotel.aboutTheHotel.peculiarities.count <= 2 ? 32 : 64
+            )
+            
+            Text(hotel.aboutTheHotel.description)
+                .font(.system(size: 16))
+            
+            ButtonsView(buttons: buttons)
+        }
     }
 }
 
 // MARK: Preview
 #Preview {
     DetailedDataView(
-        //            id: 0,
-        //            hotelName: "",
-        //            hotelAdress: "",
-        //            horating: 0,
-        //            ratingName: "",
-        //            departure: "",
-        //            arrivalCountry: "",
-        //            tourDateStart: "",
-        //            tourDateStop: "",
-        //            numberOfNights: 0,
-        //            room: "",
-        //            nutrition: "",
-        //            tourPrice: 0,
-        //            fuelCharge: 0,
-        //            serviceCharge: 0
         hotel: Hotel(
             id: 1,
             name: "",
@@ -89,7 +79,6 @@ struct ButtonsView: View {
                             .offset(y: -5)
                         VStack {
                             ListRowView(
-                                image: buttons[index].image,
                                 title: buttons[index].title,
                                 subTitle: buttons[index].subTitle
                             )
@@ -108,7 +97,6 @@ struct ButtonsView: View {
 
 // MARK: ListRowView
 struct ListRowView: View {
-    let image: String
     let title: String
     let subTitle: String
     
@@ -131,8 +119,8 @@ struct ListRowView: View {
 // MARK: PeculiaritiesTilesView
 struct PeculiaritiesTilesView: View {
     var peculiarities: [String]
-    let foregroundColor = Color(.peculiarities)
-    let backgroundColor = Color(.peculiaritiesBackground)
+    let foregroundColor: Color
+    let backgroundColor: Color
     
     var body: some View {
         GeometryReader { geometry in
@@ -153,10 +141,9 @@ struct PeculiaritiesTilesView: View {
                     ForEach(peculiarities, id: \.self) { peculiarity in
                         
                         TileView(
-                            content: peculiarity,
+                            content: Text(peculiarity),
                             foregroundColor: foregroundColor,
-                            backlgroundColor: backgroundColor,
-                            textSize: 16
+                            backlgroundColor: backgroundColor
                         )
                         .frame(
                             minWidth: 0,

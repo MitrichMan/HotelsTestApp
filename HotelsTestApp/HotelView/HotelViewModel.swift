@@ -10,22 +10,6 @@ import Combine
 
 class HotelViewModel: ObservableObject {
     
-    //        id: 0,
-    //        hotelName: "",
-    //        hotelAdress: "",
-    //        horating: 0,
-    //        ratingName: "",
-    //        departure: "",
-    //        arrivalCountry: "",
-    //        tourDateStart: "",
-    //        tourDateStop: "",
-    //        numberOfNights: 0,
-    //        room: "",
-    //        nutrition: "",
-    //        tourPrice: 0,
-    //        fuelCharge: 0,
-    //        serviceCharge: 0
-    
     var hotel = Hotel(
         id: 1,
         name: "",

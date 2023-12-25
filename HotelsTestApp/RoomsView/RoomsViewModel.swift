@@ -25,12 +25,6 @@ class RoomsViewModel: ObservableObject {
             objectWillChange.send()
         }
     }
-    
-//    var rooms = Rooms(rooms: []) {
-//        didSet {
-//            objectWillChange.send()
-//        }
-//    }
         
     let objectWillChange = ObservableObjectPublisher()
     

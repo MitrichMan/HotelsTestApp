@@ -9,51 +9,22 @@ import SwiftUI
 
 struct RoomsView: View {
     @StateObject private var viewModel = RoomsViewModel()
-    
-    let hotel: Hotel
-    
+        
     var body: some View {
-        NavigationView {
-            ScrollView {
+        NavigationStack {
                 ZStack {
                     Color("Background")
+                    ScrollView {
                     
-                    VStack {
+                    VStack(spacing: 0) {
                         ForEach(0...viewModel.rooms.rooms.count - 1, id: \.self) { index in
-                            ZStack {
-                                Color.white
-                                VStack {
-                                    CarouselView(
-                                        imageUrls: viewModel.rooms.rooms[index].imageUrls
-                                    )
-                                    Text("\(viewModel.rooms.rooms[index].name)")
-                                    
-                                    PeculiaritiesTilesView(
-                                        peculiarities: viewModel.rooms.rooms[index].peculiarities
-                                    )
-                                    
-                                    TileView(
-                                        content: "Подробнее о номере 〉",
-                                        foregroundColor: Color(.aboutTheRoomsForeground),
-                                        backlgroundColor: Color(.aboutTheRoomsBackground)
-                                    )
-                                    
-                                }
-                                .padding(16)
-                            }
-                            .clipShape(.rect(
-                                topLeadingRadius: index == 0 ? 0 : 12,
-                                bottomLeadingRadius: 12,
-                                bottomTrailingRadius: 12,
-                                topTrailingRadius: index == 0 ? 0 : 12
-                            ))
+                            RoomView(room: viewModel.rooms.rooms[index])
                         }
                     }
                 }
             }
         }
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle(hotel.name)
+//        .navigationBarTitleDisplayMode(.inline)
         
         .task {
             await viewModel.fetchRooms()
@@ -62,35 +33,59 @@ struct RoomsView: View {
 }
 
 #Preview {
-    //        id: 0,
-    //        hotelName: "",
-    //        hotelAdress: "",
-    //        horating: 0,
-    //        ratingName: "",
-    //        departure: "",
-    //        arrivalCountry: "",
-    //        tourDateStart: "",
-    //        tourDateStop: "",
-    //        numberOfNights: 0,
-    //        room: "",
-    //        nutrition: "",
-    //        tourPrice: 0,
-    //        fuelCharge: 0,
-    //        serviceCharge: 0
-    RoomsView(
-        hotel: Hotel(
-            id: 1,
-            name: "",
-            adress: "",
-            minimalPrice: 1,
-            priceForIt: "",
-            rating: 1,
-            ratingName: "",
-            imageUrls: [],
-            aboutTheHotel: AboutTheHotel(
-                description: "",
-                peculiarities: []
-            )
-        )
-    )
+    RoomsView()
+}
+
+struct RoomView: View {
+    let room: Room
+    
+    var body: some View {
+        ZStack {
+            Color.white
+            VStack(alignment: .leading, spacing: 8) {
+                CarouselView(
+                    imageUrls:
+                        room.imageUrls
+                )
+                Text("\(room.name)")
+                    .font(.system(size: 22, weight: .medium))
+                    .frame(alignment: .leading)
+                
+                PeculiaritiesTilesView(
+                    peculiarities: room.peculiarities,
+                    foregroundColor: Color(.peculiarities),
+                    backgroundColor: Color(.peculiaritiesBackground)
+                )
+                
+                .frame(
+                    height:
+                        room.peculiarities.count <= 2 ? 32 : 68
+                )
+                
+                TileView(
+                    content: 
+                        Text("Подробнее о номере ") + Text(Image(systemName: "chevron.forward")),
+                    foregroundColor:
+                        Color("AboutTheRoomForeground"),
+                    backlgroundColor:
+                        Color("AboutTheRoomBackground")
+                )
+                .padding(.bottom, 8)
+                
+                PriceView(
+                    price: "\(room.price) ₽",
+                    pricePer: room.pricePer
+                )
+                .padding(.bottom, 8)
+                
+                GoToDestinationButtonView(
+                    destination: BookingView(),
+                    text: "Выбрать номер"
+                )
+            }
+            .padding(16)
+        }
+        .cornerRadius(12)
+        .padding(.top, 8)
+    }
 }

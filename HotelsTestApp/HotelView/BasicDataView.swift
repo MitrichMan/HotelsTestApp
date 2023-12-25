@@ -19,47 +19,45 @@ struct BasicDataView: View {
             
             CarouselView(imageUrls: hotel.imageUrls)
                 .padding(.bottom, 8)
+            HotelNameHeaderView(
+                rating: hotel.rating,
+                ratingName: hotel.ratingName,
+                hotelName: hotel.name,
+                adress: hotel.adress
+            )
+//            HStack {
+//                TileView(
+//                    content: Text("★ \(hotel.rating) \(hotel.ratingName)"),
+//                    foregroundColor: .mark,
+//                    backlgroundColor: .markBackground
+//                )
+//                
+//                Spacer()
+//            }
+//            
+//            HStack {
+//                Text(hotel.name)
+//                    .font(.system(size: 22, weight: .medium))
+//                    .frame(alignment: .leading)
+//                
+//                Spacer()
+//            }
+//            
+//            HStack {
+//                Text(hotel.adress)
+//                    .font(.system(size: 14, weight: .medium))
+//                    .frame(height: 26, alignment: .leading)
+//                    .foregroundStyle(.blue)
+//                
+//                Spacer()
+//            }
+            .padding(.bottom, 8)
             
-            HStack {
-                TileView(
-                    content: "★ \(hotel.rating) \(hotel.ratingName)",
-                    foregroundColor: .mark,
-                    backlgroundColor: .markBackground
-                )
-                
-                Spacer()
-            }
             
-            HStack {
-                Text(hotel.name)
-                    .font(.system(size: 22, weight: .medium))
-                    .frame(height: 26, alignment: .leading)
-                
-                Spacer()
-            }
-            
-            HStack {
-                Text(hotel.adress)
-                    .font(.system(size: 14, weight: .medium))
-                    .frame(height: 26, alignment: .leading)
-                    .foregroundStyle(.blue)
-                
-                Spacer()
-            }
-            
-            
-            HStack(alignment: .bottom){
-                Text("От \(hotel.minimalPrice) ₽")
-                    .font(.system(size: 30, weight: .semibold))
-                    .frame(alignment: .leading)
-                
-                Spacer()
-                
-                Text(hotel.priceForIt)
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundStyle(.gray)
-                    .frame(alignment: .trailing)
-            }
+            PriceView(
+                price: "От \(hotel.minimalPrice) ₽",
+                pricePer: hotel.priceForIt
+            )
         }
         .padding(.top)
     }
@@ -67,23 +65,6 @@ struct BasicDataView: View {
 
 #Preview {
     BasicDataView(
-        
-//            id: 0,
-//            hotelName: "",
-//            hotelAdress: "",
-//            horating: 0,
-//            ratingName: "",
-//            departure: "",
-//            arrivalCountry: "",
-//            tourDateStart: "",
-//            tourDateStop: "",
-//            numberOfNights: 0,
-//            room: "",
-//            nutrition: "",
-//            tourPrice: 0,
-//            fuelCharge: 0,
-//            serviceCharge: 0
-//
         hotel: Hotel(
             id: 1,
             name: "",
@@ -103,17 +84,37 @@ struct BasicDataView: View {
 
 //MARK: TileView
 struct TileView: View {
-    let content: String
+    let content: Text
     let foregroundColor: Color
     let backlgroundColor: Color
     
     var body: some View {
         Text("\(content)")
             .font(.system(size: 16, weight: .medium))
-            .foregroundStyle(foregroundColor)
             .padding(.horizontal, 10)
+            .padding(.vertical, 5)
+            .foregroundStyle(foregroundColor)
             .background(backlgroundColor)
-            .cornerRadius(5)
             .frame(alignment: .leading)
+            .cornerRadius(5)
+    }
+}
+
+struct PriceView: View {
+    let price: String
+    let pricePer: String
+    
+    var body: some View {
+        HStack(alignment: .bottom){
+            Text("\(price)")
+                .font(.system(size: 30, weight: .semibold))
+                .frame(alignment: .leading)
+            
+            Text(pricePer)
+                .font(.system(size: 16, weight: .medium))
+                .foregroundStyle(.gray)
+            
+            Spacer()
+        }
     }
 }
