@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class BookingViewModel: ObservableObject {
+final class BookingViewModel: ObservableObject {
     
     var bookingData: BookingData = BookingData(
                 id: 0,
@@ -32,13 +32,27 @@ class BookingViewModel: ObservableObject {
         }
     }
     
-    @Published var tourists = DataManager.shared.tourists {
+    var tourists: [Tourist] = [Tourist(
+        name: "",
+        lastName: "",
+        dateOfBirth: "",
+        citizenship: "",
+        passportNumber: "",
+        passportExpirationDate: ""
+    )] {
         didSet {
             objectWillChange.send()
         }
     }
     
+    let bookingDataViewData: [BookingDataViewData] = []
+    
     var customerData = DataManager.shared.customerData
+    
+    let bookingDataNames = DataManager.shared.bookingDataNames
+    let finalPriceNames = DataManager.shared.finalPriceNames
+    
+    
     
     let objectWillChange = ObservableObjectPublisher()
     
@@ -48,5 +62,80 @@ class BookingViewModel: ObservableObject {
         } catch {
             print(error.localizedDescription)
         }
+    }
+    
+    func addTourist() {
+        tourists.append(Tourist(
+            name: "",
+            lastName: "",
+            dateOfBirth: "",
+            citizenship: "",
+            passportNumber: "",
+            passportExpirationDate: ""
+        ))
+    }
+    
+    func prepareBookingDataViewData(names: [BookingDataFieldName]) -> [BookingDataViewData] {
+        var dataToDisplay: [BookingDataViewData] = []
+        
+        for name in names {
+            switch name {
+            case .arrivalCountry:
+                dataToDisplay.append(BookingDataViewData(
+                    title: name.rawValue,
+                    subtitle: bookingData.arrivalCountry
+                ))
+            case .dates:
+                dataToDisplay.append(BookingDataViewData(
+                    title: name.rawValue,
+                    subtitle: "\(bookingData.tourDateStop) - \(bookingData.tourDateStop)"
+                ))
+            case .numberOfNights:
+                dataToDisplay.append(BookingDataViewData(title: name.rawValue, subtitle: String(bookingData.numberOfNights)))
+            case .hotelName:
+                dataToDisplay.append(BookingDataViewData(
+                    title: name.rawValue,
+                    subtitle: bookingData.hotelName
+                ))
+            case .room:
+                dataToDisplay.append(BookingDataViewData(
+                    title: name.rawValue,
+                    subtitle: bookingData.room
+                ))
+            case .nutrition:
+                dataToDisplay.append(BookingDataViewData(
+                    title: name.rawValue,
+                    subtitle: bookingData.nutrition
+                ))
+            case .departure:
+                dataToDisplay.append(BookingDataViewData(
+                    title: name.rawValue,
+                    subtitle: bookingData.departure
+                ))
+                
+            case .tourPrice:
+                dataToDisplay.append(BookingDataViewData(
+                    title: name.rawValue,
+                    subtitle: String(bookingData.tourPrice)
+                ))
+            case .fuelCharge:
+                dataToDisplay.append(BookingDataViewData(
+                    title: name.rawValue,
+                    subtitle: String(bookingData.fuelCharge)
+                ))
+            case .serviceCharge:
+                dataToDisplay.append(BookingDataViewData(
+                    title: name.rawValue,
+                    subtitle: String(bookingData.serviceCharge)
+                ))
+            case .totalPrice:
+                dataToDisplay.append(BookingDataViewData(
+                    title: name.rawValue,
+                    subtitle: String(bookingData.tourPrice + bookingData.fuelCharge + bookingData.serviceCharge)
+                ))
+            }
+        }
+        
+        return dataToDisplay
     }
 }

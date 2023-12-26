@@ -12,7 +12,7 @@ struct HotelView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            NavigationView {
+            NavigationStack {
                 VStack {
                     ZStack {
                         Color("Background")
@@ -53,18 +53,18 @@ struct HotelView: View {
                             
                         }
                     }
-                    .navigationBarTitle("Отель")
-                    .navigationBarTitleDisplayMode(.inline)
                     
                     GoToDestinationButtonView(
-                        destination: RoomsView(), 
+                        destination: RoomsView(),
                         text: "К выбору номера"
                     )
                         .padding(.horizontal, 16)
                 }
-                
-                
+                .navigationBarTitle("Отель")
+                .navigationBarTitleDisplayMode(.inline)
             }
+            .navigationBarBackButtonHidden()
+            
             .task {
                 await viewModel.fetchHotel()
             }
@@ -93,6 +93,7 @@ struct GoToDestinationButtonView: View {
                 
                 Spacer()
             }
+            .padding(.vertical, 6)
         }
         .buttonStyle(.borderedProminent)
         .font(.system(size: 16, weight: .medium))

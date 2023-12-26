@@ -11,51 +11,49 @@ struct BookingView: View {
     @StateObject var viewModel = BookingViewModel()
     
     var body: some View {
-        NavigationView {
-            ZStack{
-                Color.background
-                HStack {
-                    ScrollView {
-                        HotelNameHeaderView(
-                            rating: viewModel.bookingData.horating,
-                            ratingName: viewModel.bookingData.ratingName,
-                            hotelName: viewModel.bookingData.hotelName,
-                            adress: viewModel.bookingData.hotelAdress
-                        )
-                        
-                        BookingDataView(bookingData: viewModel.bookingData)
-                        
-                        CustomerInfoView(phone: $viewModel.customerData.phone, email: $viewModel.customerData.email)
-                        
-                        TouristDataView(tourists: viewModel.tourists)
-                        
-                        ZStack {
-                            Color.white
-                            HStack {
-                                Text("Добавить туриста")
-                                    .font(.system(size: 22, weight: .medium))
-                                
-                                Spacer()
-                                
-                                Button(
-                                    action: {
-                                    DataManager.shared.addTourist()
-                                }, 
-                                    label: {
-                                    Image(systemName: "plus")
-                                            .frame(width: 24, height: 24)
-                                }
+        NavigationStack {
+            VStack {
+                ZStack{
+                    Color.background
+                    HStack {
+                        VStack {
+                            ScrollView {
+                                HotelNameHeaderView(
+                                    rating: viewModel.bookingData.horating,
+                                    ratingName: viewModel.bookingData.ratingName,
+                                    hotelName: viewModel.bookingData.hotelName,
+                                    adress: viewModel.bookingData.hotelAdress
                                 )
-                                .frame(width: 32, height: 32)
-                                .buttonStyle(.borderedProminent)
+                                
+                                BookingDataView(
+                                    data: viewModel.prepareBookingDataViewData(
+                                        names: viewModel.bookingDataNames
+                                    )
+                                )
+                                
+                                CustomerInfoView(phone: $viewModel.customerData.phone, email: $viewModel.customerData.email)
+                                
+                                TouristDataView(tourists: $viewModel.tourists)
+                                
+                                AddTouristView(action: viewModel.addTourist)
+                                
+                                BookingDataView(
+                                    data: viewModel.prepareBookingDataViewData(
+                                        names: viewModel.finalPriceNames
+                                    )
+                                )
                             }
-                            .padding()
                         }
                     }
                 }
-            }
-            .navigationBarTitleDisplayMode(.inline)
+                .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("Бронирование")
+                GoToDestinationButtonView(
+                    destination: SuccessView(),
+                    text: "Оплатить \(viewModel.bookingData.tourPrice + viewModel.bookingData.fuelCharge + viewModel.bookingData.serviceCharge)"
+                )
+                .padding(.horizontal)
+            }
         }
         .task {
             await viewModel.fetchBookingData()
@@ -104,8 +102,7 @@ struct HotelNameHeaderView: View {
 }
 
 struct BookingDataView: View {
-    let bookingData: BookingData
-    
+    var data: [BookingDataViewData]
     
     var body: some View {
         ZStack {
@@ -124,20 +121,13 @@ struct BookingDataView: View {
                 alignment: .leading,
                 spacing: 8,
                 content: {
-                    ForEach(
-                        DataManager.shared.bookingDataNames,
-                        id: \.self
-                    ) { name in
-                        
-                        
-                        Text(name.rawValue)
+                    ForEach(data, id: \.self) { data in
+                            
+                        Text(data.title)
                             .font(.system(size: 16, weight: .medium))
                             .foregroundStyle(.gray)
                         
-                        Text(DataManager.shared.prepareBookingData(
-                            name: name,
-                            data: bookingData
-                        ))
+                        Text(data.subtitle)
                     }
                 }
             )
@@ -209,7 +199,7 @@ struct CustomerInfoView: View {
 
 
 struct TouristDataView: View {
-    let tourists: [Tourist]
+    @Binding var tourists: [Tourist]
     
     var body: some View {
         VStack {
@@ -226,31 +216,43 @@ struct TouristDataView: View {
                                 .padding(.top)
                             
                             Spacer()
-                            
-                            Image(systemName: "chevron.up")
-                                .padding(.vertical, 10)
-                                .padding(.horizontal, 7)
-                                .fontWeight(.medium)
-                                .font(.system(size: 22))
-                                .foregroundColor(.aboutTheRoomForeground)
-                                .background(.aboutTheRoomBackground)
-                                .cornerRadius(6)
+                            Button {
+                                tourists[index].isPresented.toggle()
+                            } label: {
+                                Image(
+                                    systemName: tourists[index].isPresented
+                                      ? "chevron.up"
+                                      : "chevron.down"
+                                )
+                                    .padding(.vertical, 10)
+                                    .padding(.horizontal, 7)
+                                    .fontWeight(.medium)
+                                    .font(.system(size: 22))
+                                    .foregroundColor(.aboutTheRoomForeground)
+                                    .background(.aboutTheRoomBackground)
+                                    .cornerRadius(6)
+                            }
+
                         }
                         .padding(.horizontal)
                         
-                        ForEach(
-                            DataManager.shared.touristDataFieldNames,
-                            id: \.self
-                        ) { name in
-                            
-                            DataTextFieldView(
-                                fieldName: name.rawValue,
-                                text: .constant(DataManager.shared.prepareTouristData(
-                                    name: name,
-                                    data: tourists[index]
-                                ))
-                            )
+                        if tourists[index].isPresented {
+                            ForEach(
+                                DataManager.shared.touristDataFieldNames,
+                                id: \.self
+                            ) { name in
+                                
+                                DataTextFieldView(
+                                    fieldName: name.rawValue,
+                                    text: .constant(DataManager.shared.prepareTouristData(
+                                        name: name,
+                                        data: tourists[index]
+                                    ))
+                                )
+                            }
                         }
+                        //jknbnmnb
+                        
                     }
                     .padding(.bottom)
                 }
@@ -258,5 +260,34 @@ struct TouristDataView: View {
             }
         }
         .padding(.bottom)
+    }
+}
+
+struct AddTouristView: View {
+    let action: () -> Void
+    
+    var body: some View {
+        ZStack {
+            Color.white
+            HStack {
+                Text("Добавить туриста")
+                    .font(.system(size: 22, weight: .medium))
+                
+                Spacer()
+                
+                Button(
+                    action: {
+                        action()
+                    },
+                    label: {
+                        Image(systemName: "plus")
+                            .frame(width: 24, height: 24)
+                    }
+                )
+                .frame(width: 32, height: 32)
+                .buttonStyle(.borderedProminent)
+            }
+            .padding()
+        }
     }
 }

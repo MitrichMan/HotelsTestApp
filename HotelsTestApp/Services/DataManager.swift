@@ -35,18 +35,14 @@ class DataManager: ObservableObject {
         email: "examplemail.000@mail.ru"
     )
     
-    @Published var tourists: [Tourist] = [Tourist(
+    var tourists: [Tourist] = [Tourist(
         name: "",
         lastName: "",
         dateOfBirth: "",
         citizenship: "",
         passportNumber: "",
         passportExpirationDate: ""
-    )] {
-        didSet {
-            objectWillChange.send()
-        }
-    }
+    )] 
     
     let bookingDataNames: [BookingDataFieldName] = [
         .departure,
@@ -65,6 +61,13 @@ class DataManager: ObservableObject {
         .citizenship,
         .passportNumber,
         .passportExpirationDate
+    ]
+    
+    let finalPriceNames: [BookingDataFieldName] = [
+        .tourPrice,
+        .fuelCharge,
+        .serviceCharge,
+        .totalPrice
     ]
     
     let objectWillChange = ObservableObjectPublisher()
@@ -87,6 +90,15 @@ class DataManager: ObservableObject {
             data.nutrition
         case .departure:
             data.departure
+            
+        case .tourPrice:
+            String(data.tourPrice)
+        case .fuelCharge:
+            String(data.fuelCharge)
+        case .serviceCharge:
+            String(data.serviceCharge)
+        case .totalPrice:
+            String(data.tourPrice + data.fuelCharge + data.serviceCharge)
         }
     }
     
@@ -106,6 +118,19 @@ class DataManager: ObservableObject {
             data.passportExpirationDate
         }
     }
+    
+//    func prepareFinalPriceData(name: FinalPriceFieldName, data: BookingData) -> Int {
+//        switch name {
+//        case .tourPrice:
+//            data.tourPrice
+//        case .fuelCharge:
+//            data.fuelCharge
+//        case .serviceCharge:
+//            data.serviceCharge
+//        case .totalPrice:
+//            data.tourPrice + data.fuelCharge + data.serviceCharge
+//        }
+//    }
     
     func addTourist() {
         tourists.append(Tourist(
@@ -127,6 +152,11 @@ enum BookingDataFieldName: String {
     case hotelName = "Отель"
     case room = "Номер"
     case nutrition = "Питание"
+    
+    case tourPrice = "Тур"
+    case fuelCharge = "Топливный сбор"
+    case serviceCharge = "Сервисный сбор"
+    case totalPrice = "К оплате"
 }
 
 enum TouristDataFieldName: String {
@@ -137,3 +167,10 @@ enum TouristDataFieldName: String {
     case passportNumber = "Номер загранпаспорта"
     case passportExpirationDate =  "Срок действия загранпаспорта"
 }
+
+//enum FinalPriceFieldName: String {
+//    case tourPrice = "Тур"
+//    case fuelCharge = "Топливный сбор"
+//    case serviceCharge = "Сервисный сбор"
+//    case totalPrice = "К оплате"
+//}

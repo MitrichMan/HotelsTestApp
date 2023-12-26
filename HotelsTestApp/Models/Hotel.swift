@@ -64,6 +64,23 @@ struct Tourist {
     var citizenship: String
     var passportNumber: String
     var passportExpirationDate: String
+    var isPresented = true
+    
+    init(
+        name: String,
+        lastName: String,
+        dateOfBirth: String,
+        citizenship: String,
+        passportNumber: String,
+        passportExpirationDate: String
+    ) {
+        self.name = name
+        self.lastName = lastName
+        self.dateOfBirth = dateOfBirth
+        self.citizenship = citizenship
+        self.passportNumber = passportNumber
+        self.passportExpirationDate = passportExpirationDate
+    }
 }
 
 struct CustomerData {
@@ -75,4 +92,9 @@ struct HotelButton {
     let title: String
     let subTitle: String
     let image: String
+}
+
+struct BookingDataViewData: Hashable{
+    let title: String
+    let subtitle: String
 }
