@@ -119,19 +119,6 @@ class DataManager: ObservableObject {
         }
     }
     
-//    func prepareFinalPriceData(name: FinalPriceFieldName, data: BookingData) -> Int {
-//        switch name {
-//        case .tourPrice:
-//            data.tourPrice
-//        case .fuelCharge:
-//            data.fuelCharge
-//        case .serviceCharge:
-//            data.serviceCharge
-//        case .totalPrice:
-//            data.tourPrice + data.fuelCharge + data.serviceCharge
-//        }
-//    }
-    
     func addTourist() {
         tourists.append(Tourist(
             name: "",
@@ -168,9 +155,7 @@ enum TouristDataFieldName: String {
     case passportExpirationDate =  "Срок действия загранпаспорта"
 }
 
-//enum FinalPriceFieldName: String {
-//    case tourPrice = "Тур"
-//    case fuelCharge = "Топливный сбор"
-//    case serviceCharge = "Сервисный сбор"
-//    case totalPrice = "К оплате"
-//}
+enum PresentationMode {
+    case narrow
+    case wide
+}

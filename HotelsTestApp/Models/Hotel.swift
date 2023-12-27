@@ -94,7 +94,8 @@ struct HotelButton {
     let image: String
 }
 
-struct BookingDataViewData: Hashable{
+struct DataViewData: Hashable{
     let title: String
     let subtitle: String
+    let presentationMode: PresentationMode
 }

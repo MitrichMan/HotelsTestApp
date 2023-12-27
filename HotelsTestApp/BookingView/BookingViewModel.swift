@@ -45,7 +45,7 @@ final class BookingViewModel: ObservableObject {
         }
     }
     
-    let bookingDataViewData: [BookingDataViewData] = []
+    let bookingDataViewData: [DataViewData] = []
     
     var customerData = DataManager.shared.customerData
     
@@ -75,63 +75,74 @@ final class BookingViewModel: ObservableObject {
         ))
     }
     
-    func prepareBookingDataViewData(names: [BookingDataFieldName]) -> [BookingDataViewData] {
-        var dataToDisplay: [BookingDataViewData] = []
+    func prepareBookingDataViewData(names: [BookingDataFieldName]) -> [DataViewData] {
+        var dataToDisplay: [DataViewData] = []
         
         for name in names {
             switch name {
             case .arrivalCountry:
-                dataToDisplay.append(BookingDataViewData(
+                dataToDisplay.append(DataViewData(
                     title: name.rawValue,
-                    subtitle: bookingData.arrivalCountry
+                    subtitle: bookingData.arrivalCountry, 
+                    presentationMode: .narrow
                 ))
             case .dates:
-                dataToDisplay.append(BookingDataViewData(
+                dataToDisplay.append(DataViewData(
                     title: name.rawValue,
-                    subtitle: "\(bookingData.tourDateStop) - \(bookingData.tourDateStop)"
+                    subtitle: "\(bookingData.tourDateStop) - \(bookingData.tourDateStop)", 
+                    presentationMode: .narrow
                 ))
             case .numberOfNights:
-                dataToDisplay.append(BookingDataViewData(title: name.rawValue, subtitle: String(bookingData.numberOfNights)))
+                dataToDisplay.append(DataViewData(title: name.rawValue, subtitle: String(bookingData.numberOfNights), 
+                                                  presentationMode: .narrow))
             case .hotelName:
-                dataToDisplay.append(BookingDataViewData(
+                dataToDisplay.append(DataViewData(
                     title: name.rawValue,
-                    subtitle: bookingData.hotelName
+                    subtitle: bookingData.hotelName, 
+                    presentationMode: .narrow
                 ))
             case .room:
-                dataToDisplay.append(BookingDataViewData(
+                dataToDisplay.append(DataViewData(
                     title: name.rawValue,
-                    subtitle: bookingData.room
+                    subtitle: bookingData.room, 
+                    presentationMode: .narrow
                 ))
             case .nutrition:
-                dataToDisplay.append(BookingDataViewData(
+                dataToDisplay.append(DataViewData(
                     title: name.rawValue,
-                    subtitle: bookingData.nutrition
+                    subtitle: bookingData.nutrition, 
+                    presentationMode: .narrow
                 ))
             case .departure:
-                dataToDisplay.append(BookingDataViewData(
+                dataToDisplay.append(DataViewData(
                     title: name.rawValue,
-                    subtitle: bookingData.departure
+                    subtitle: bookingData.departure, 
+                    presentationMode: .narrow
                 ))
                 
             case .tourPrice:
-                dataToDisplay.append(BookingDataViewData(
+                dataToDisplay.append(DataViewData(
                     title: name.rawValue,
-                    subtitle: String(bookingData.tourPrice)
+                    subtitle: "\(bookingData.tourPrice) ₽",
+                    presentationMode: .wide
                 ))
             case .fuelCharge:
-                dataToDisplay.append(BookingDataViewData(
+                dataToDisplay.append(DataViewData(
                     title: name.rawValue,
-                    subtitle: String(bookingData.fuelCharge)
+                    subtitle: "\(bookingData.fuelCharge) ₽",
+                    presentationMode: .wide
                 ))
             case .serviceCharge:
-                dataToDisplay.append(BookingDataViewData(
+                dataToDisplay.append(DataViewData(
                     title: name.rawValue,
-                    subtitle: String(bookingData.serviceCharge)
+                    subtitle: "\(bookingData.serviceCharge) ₽",
+                    presentationMode: .wide
                 ))
             case .totalPrice:
-                dataToDisplay.append(BookingDataViewData(
+                dataToDisplay.append(DataViewData(
                     title: name.rawValue,
-                    subtitle: String(bookingData.tourPrice + bookingData.fuelCharge + bookingData.serviceCharge)
+                    subtitle: "\(bookingData.tourPrice + bookingData.fuelCharge + bookingData.serviceCharge) ₽",
+                    presentationMode: .wide
                 ))
             }
         }

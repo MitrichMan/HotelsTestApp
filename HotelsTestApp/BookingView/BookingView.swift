@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct BookingView: View {
+    @EnvironmentObject private var coordinator: Coordinator
     @StateObject var viewModel = BookingViewModel()
     
     var body: some View {
-        NavigationStack {
             VStack {
                 ZStack{
                     Color.background
-                    HStack {
                         VStack {
                             ScrollView {
                                 HotelNameHeaderView(
@@ -25,7 +24,7 @@ struct BookingView: View {
                                     adress: viewModel.bookingData.hotelAdress
                                 )
                                 
-                                BookingDataView(
+                                DataView(
                                     data: viewModel.prepareBookingDataViewData(
                                         names: viewModel.bookingDataNames
                                     )
@@ -37,24 +36,30 @@ struct BookingView: View {
                                 
                                 AddTouristView(action: viewModel.addTourist)
                                 
-                                BookingDataView(
+                                DataView(
                                     data: viewModel.prepareBookingDataViewData(
                                         names: viewModel.finalPriceNames
                                     )
                                 )
                             }
                         }
-                    }
                 }
-                .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("Бронирование")
+                
                 GoToDestinationButtonView(
-                    destination: SuccessView(),
-                    text: "Оплатить \(viewModel.bookingData.tourPrice + viewModel.bookingData.fuelCharge + viewModel.bookingData.serviceCharge)"
+                    text: "Оплатить \(viewModel.bookingData.tourPrice + viewModel.bookingData.fuelCharge + viewModel.bookingData.serviceCharge)",
+                    page: .success
                 )
                 .padding(.horizontal)
             }
-        }
+            .navigationTitle("Бронирование")
+            .navigationBarBackButtonHidden()
+            .navigationBarItems(leading: Button(action: {
+                coordinator.pop()
+            }, label: {
+                Image(systemName: "chevron.left")
+                    .foregroundColor(.black)
+            }))
+    
         .task {
             await viewModel.fetchBookingData()
         }
@@ -92,17 +97,17 @@ struct HotelNameHeaderView: View {
                         .foregroundStyle(.blue)
                     
                 }
+//                .padding()
                 Spacer()
             }
-            .padding()
         }
         .cornerRadius(12)
         .padding(.top, 8)
     }
 }
 
-struct BookingDataView: View {
-    var data: [BookingDataViewData]
+struct DataView: View {
+    var data: [DataViewData]
     
     var body: some View {
         ZStack {
@@ -112,6 +117,7 @@ struct BookingDataView: View {
                     GridItem(.flexible(
                         minimum: 0,
                         maximum: 140)
+
                     ),
                     GridItem(.flexible(
                         minimum: 0,
@@ -126,7 +132,7 @@ struct BookingDataView: View {
                         Text(data.title)
                             .font(.system(size: 16, weight: .medium))
                             .foregroundStyle(.gray)
-                        
+                                            
                         Text(data.subtitle)
                     }
                 }

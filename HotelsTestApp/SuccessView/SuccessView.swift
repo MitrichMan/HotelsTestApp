@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct SuccessView: View {
+    @EnvironmentObject private var coordinator: Coordinator
+
     var body: some View {
-        NavigationStack {
             VStack {
-                
                 Spacer()
                 
                 ZStack {
@@ -34,10 +34,19 @@ struct SuccessView: View {
                 Spacer()
             }
             .padding()
-            
-        }
+            .navigationTitle("Заказ оплачен")
+            .navigationBarBackButtonHidden()
+            .navigationBarItems(leading: Button(action: {
+                coordinator.pop()
+            }, label: {
+                Image(systemName: "chevron.left")
+                    .foregroundColor(.black)
+            }))
         
-        GoToDestinationButtonView(destination: HotelView(), text: "Супер!")
+        GoToDestinationButtonView(
+            text: "Супер!",
+            page: .hotel
+        )
             .padding()
     }
 }

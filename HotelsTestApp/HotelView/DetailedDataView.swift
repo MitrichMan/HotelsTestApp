@@ -15,30 +15,35 @@ struct DetailedDataView: View {
     let buttons: [HotelButton]
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 16){
-            HStack {
-                Text("Об отеле")
-                    .font(.system(size: 22, weight: .medium))
+        ZStack {
+            Color.white
+            VStack(alignment: .leading, spacing: 16){
+                HStack {
+                    Text("Об отеле")
+                        .font(.system(size: 22, weight: .medium))
+                    
+                    Spacer()
+                }
                 
-                Spacer()
+                PeculiaritiesTilesView(
+                    peculiarities: hotel.aboutTheHotel.peculiarities,
+                    foregroundColor: Color(.peculiarities),
+                    backgroundColor: Color(.peculiaritiesBackground)
+                )
+                
+                .frame(
+                    height:
+                        hotel.aboutTheHotel.peculiarities.count <= 2 ? 32 : 64
+                )
+                
+                Text(hotel.aboutTheHotel.description)
+                    .font(.system(size: 16))
+                
+                ButtonsView(buttons: buttons)
             }
-            
-            PeculiaritiesTilesView(
-                peculiarities: hotel.aboutTheHotel.peculiarities,
-                foregroundColor: Color(.peculiarities),
-                backgroundColor: Color(.peculiaritiesBackground)
-            )
-            
-            .frame(
-                height:
-                    hotel.aboutTheHotel.peculiarities.count <= 2 ? 32 : 64
-            )
-            
-            Text(hotel.aboutTheHotel.description)
-                .font(.system(size: 16))
-            
-            ButtonsView(buttons: buttons)
+//            .padding()
         }
+        .cornerRadius(12)
     }
 }
 
@@ -128,18 +133,17 @@ struct PeculiaritiesTilesView: View {
                 columns: [
                     GridItem(.flexible(
                         minimum: 0,
-                        maximum: geometry.size.width - 32)
+                        maximum: geometry.size.width)
                     ),
                     GridItem(.flexible(
                         minimum: 0,
-                        maximum: geometry.size.width - 32)
+                        maximum: geometry.size.width)
                     )
                 ],
                 alignment: .leading,
                 spacing: 8,
                 content: {
                     ForEach(peculiarities, id: \.self) { peculiarity in
-                        
                         TileView(
                             content: Text(peculiarity),
                             foregroundColor: foregroundColor,
@@ -147,7 +151,7 @@ struct PeculiaritiesTilesView: View {
                         )
                         .frame(
                             minWidth: 0,
-                            maxWidth: geometry.size.width / 2 - 20
+                            maxWidth: geometry.size.width / 2 - 4
                         )
                         .fixedSize(horizontal: true, vertical: false)
                     }

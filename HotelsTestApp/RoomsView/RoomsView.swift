@@ -8,23 +8,37 @@
 import SwiftUI
 
 struct RoomsView: View {
+    @EnvironmentObject private var coordinator: Coordinator
     @StateObject private var viewModel = RoomsViewModel()
-        
+    
     var body: some View {
-        NavigationStack {
-                ZStack {
-                    Color("Background")
-                    ScrollView {
-                    
-                    VStack(spacing: 0) {
-                        ForEach(0...viewModel.rooms.rooms.count - 1, id: \.self) { index in
-                            RoomView(room: viewModel.rooms.rooms[index])
-                        }
+        ZStack {
+            Color("Background")
+            
+            ScrollView {
+                VStack(spacing: 0) {
+                    ForEach(0...viewModel.rooms.rooms.count - 1, id: \.self) { index in
+                        RoomView(
+                            room: viewModel.rooms.rooms[index]
+                        )
+                        
+                        GoToDestinationButtonView(
+                            text: "Выбрать номер",
+                            page: .booking
+                        )
                     }
                 }
             }
         }
-
+        .navigationTitle("ERTYUILKJH")
+        .navigationBarBackButtonHidden()
+        .navigationBarItems(leading: Button(action: {
+            coordinator.pop()
+        }, label: {
+            Image(systemName: "chevron.left")
+                .foregroundColor(.black)
+        }))
+        
         .task {
             await viewModel.fetchRooms()
         }
@@ -37,6 +51,7 @@ struct RoomsView: View {
 
 struct RoomView: View {
     let room: Room
+//    let navigationButtonAction: ()
     
     var body: some View {
         ZStack {
@@ -76,11 +91,6 @@ struct RoomView: View {
                     pricePer: room.pricePer
                 )
                 .padding(.bottom, 8)
-                
-                GoToDestinationButtonView(
-                    destination: BookingView(),
-                    text: "Выбрать номер"
-                )
             }
             .padding(16)
         }

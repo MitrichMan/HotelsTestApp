@@ -8,62 +8,36 @@
 import SwiftUI
 
 struct HotelView: View {
+    @EnvironmentObject private var coordinator: Coordinator
     @StateObject private var viewModel = HotelViewModel()
     
     var body: some View {
         GeometryReader { geometry in
-            NavigationStack {
                 VStack {
                     ZStack {
                         Color("Background")
-                        
-                        VStack {
-                            ScrollView(.vertical) {
-                                VStack(spacing: 8) {
-                                    ZStack {
-                                        Color(.white)
-                                        
-                                        BasicDataView(hotel: viewModel.hotel)
-                                        .padding(.horizontal, 16)
-                                        .padding(.bottom)
-                                        
-                                    }
-                                    .clipShape(
-                                        .rect(
-                                            topLeadingRadius: 0,
-                                            bottomLeadingRadius: 12,
-                                            bottomTrailingRadius: 12,
-                                            topTrailingRadius: 0
-                                        )
-                                    )
-                                    
-                                    ZStack {
-                                        Color(.white)
-                                        DetailedDataView(
-                                            hotel: viewModel.hotel,
-                                            width: geometry.size.width,
-                                            buttons: viewModel.buttons
-                                        )
-                                        .padding()
-                                    }
-                                    .cornerRadius(12)
-                                    .padding(.bottom, 16)
-                                }
+                        ScrollView(.vertical) {
+                            VStack(spacing: 8) {
+                                
+                                BasicDataView(hotel: viewModel.hotel)
+                                
+                                DetailedDataView(
+                                    hotel: viewModel.hotel,
+                                    width: geometry.size.width,
+                                    buttons: viewModel.buttons
+                                )
                             }
-                            
                         }
                     }
-                    
                     GoToDestinationButtonView(
-                        destination: RoomsView(),
-                        text: "К выбору номера"
+                        text: "К выбору номера", 
+                        page: .rooms
                     )
-                        .padding(.horizontal, 16)
+                    .environmentObject(coordinator)
+                    .padding(.horizontal, 16)
                 }
-                .navigationBarTitle("Отель")
+                .navigationTitle("Отель")
                 .navigationBarTitleDisplayMode(.inline)
-            }
-            .navigationBarBackButtonHidden()
             
             .task {
                 await viewModel.fetchHotel()
@@ -74,29 +48,5 @@ struct HotelView: View {
 
 #Preview {
     HotelView()
-}
-
-struct GoToDestinationButtonView: View {
-    let destination: any View
-    let text: String
-    
-    var body: some View {
-        NavigationLink {
-            AnyView(destination)
-        } label: {
-            HStack {
-                Spacer()
-                
-                Text(text)
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundColor(.white)
-                
-                Spacer()
-            }
-            .padding(.vertical, 6)
-        }
-        .buttonStyle(.borderedProminent)
-        .font(.system(size: 16, weight: .medium))
-        .foregroundColor(.white)
-    }
+        .environmentObject(Coordinator())
 }

@@ -15,24 +15,35 @@ struct BasicDataView: View {
     let objectWillChange = ObservableObjectPublisher()
     
     var body: some View {
-        VStack(spacing: 8) {
-            
-            CarouselView(imageUrls: hotel.imageUrls)
+        ZStack {
+            Color.white
+            VStack(spacing: 8) {
+                
+                CarouselView(imageUrls: hotel.imageUrls)
+                    .padding(.bottom, 8)
+                HotelNameHeaderView(
+                    rating: hotel.rating,
+                    ratingName: hotel.ratingName,
+                    hotelName: hotel.name,
+                    adress: hotel.adress
+                )
                 .padding(.bottom, 8)
-            HotelNameHeaderView(
-                rating: hotel.rating,
-                ratingName: hotel.ratingName,
-                hotelName: hotel.name,
-                adress: hotel.adress
-            )
-            .padding(.bottom, 8)
-            
-            PriceView(
-                price: "От \(hotel.minimalPrice) ₽",
-                pricePer: hotel.priceForIt
-            )
+                
+                PriceView(
+                    price: "От \(hotel.minimalPrice) ₽",
+                    pricePer: hotel.priceForIt
+                )
+            }
+            .padding()
         }
-        .padding(.top)
+        .clipShape(
+            .rect(
+                topLeadingRadius: 0,
+                bottomLeadingRadius: 12,
+                bottomTrailingRadius: 12,
+                topTrailingRadius: 0
+            )
+        )
     }
 }
 
