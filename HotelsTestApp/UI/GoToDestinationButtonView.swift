@@ -40,8 +40,3 @@ struct GoToDestinationButtonView: View {
         .padding(.horizontal)
     }
 }
-
-#Preview {
-    GoToDestinationButtonView(text: "Text", page: .hotel)
-        .environmentObject(Coordinator())
-}

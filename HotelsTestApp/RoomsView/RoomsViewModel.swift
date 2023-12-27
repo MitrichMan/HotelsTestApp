@@ -9,10 +9,6 @@ import Foundation
 import Combine
 
 class RoomsViewModel: ObservableObject {
-    
-//    let aboutTheRoomsForegroundColor = Color(.aboutTheRoomsForeground)
-//    let aboutTheRoomsBackgroundColor = Color(.aboutTheRoomsBackground)
-    
     var rooms = Rooms(rooms: [Room(
         id: 1,
         name: "",

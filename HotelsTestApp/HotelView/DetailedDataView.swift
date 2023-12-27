@@ -25,23 +25,26 @@ struct DetailedDataView: View {
                     Spacer()
                 }
                 
-                PeculiaritiesTilesView(
-                    peculiarities: hotel.aboutTheHotel.peculiarities,
-                    foregroundColor: Color(.peculiarities),
-                    backgroundColor: Color(.peculiaritiesBackground)
-                )
-                
-                .frame(
-                    height:
-                        hotel.aboutTheHotel.peculiarities.count <= 2 ? 32 : 64
-                )
+                HStack {
+                    TileStackView(
+                        content: hotel.aboutTheHotel.peculiarities,
+                        foregroundColor: Color(.peculiarities),
+                        backgroundColor: Color(.peculiaritiesBackground)
+                    )
+                    .frame(
+                        height:
+                            hotel.aboutTheHotel.peculiarities.count <= 2 ? 32 : 64
+                    )
+                    
+                    Spacer()
+                }
                 
                 Text(hotel.aboutTheHotel.description)
                     .font(.system(size: 16))
                 
                 ButtonsView(buttons: buttons)
             }
-//            .padding()
+            .padding()
         }
         .cornerRadius(12)
     }
@@ -122,8 +125,8 @@ struct ListRowView: View {
 }
 
 // MARK: PeculiaritiesTilesView
-struct PeculiaritiesTilesView: View {
-    var peculiarities: [String]
+struct TileStackView: View {
+    var content: [String]
     let foregroundColor: Color
     let backgroundColor: Color
     
@@ -143,9 +146,9 @@ struct PeculiaritiesTilesView: View {
                 alignment: .leading,
                 spacing: 8,
                 content: {
-                    ForEach(peculiarities, id: \.self) { peculiarity in
+                    ForEach(content, id: \.self) { text in
                         TileView(
-                            content: Text(peculiarity),
+                            content: Text(text),
                             foregroundColor: foregroundColor,
                             backlgroundColor: backgroundColor
                         )
