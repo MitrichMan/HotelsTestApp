@@ -6,18 +6,9 @@
 //
 
 import SwiftUI
-//import Combine
 
 @MainActor class Coordinator: ObservableObject {
-    
-    @Published var path = NavigationPath() 
-//    {
-//        didSet {
-//            objectWillChange.send()
-//        }
-//    }
-    
-//    let objectWillChange = ObservableObjectPublisher()
+    @Published var path = NavigationPath()
     
     func push(_ page: Page) {
         path.append(page)
