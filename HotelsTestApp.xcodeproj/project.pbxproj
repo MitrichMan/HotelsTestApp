@@ -34,6 +34,8 @@
 		4DBF90062B31DA61006FA6A7 /* BookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF90052B31DA61006FA6A7 /* BookingViewModel.swift */; };
 		4DBF90092B31DAD5006FA6A7 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF90082B31DAD5006FA6A7 /* NetworkManager.swift */; };
 		4DBF900C2B31FFE7006FA6A7 /* SuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF900B2B31FFE7006FA6A7 /* SuccessView.swift */; };
+		4DEFCBF02B3CD6D7004C9988 /* HotelNameHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEFCBEF2B3CD6D7004C9988 /* HotelNameHeaderView.swift */; };
+		4DEFCBF22B3CD700004C9988 /* DataTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEFCBF12B3CD700004C9988 /* DataTextFieldView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +67,8 @@
 		4DBF90052B31DA61006FA6A7 /* BookingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewModel.swift; sourceTree = "<group>"; };
 		4DBF90082B31DAD5006FA6A7 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		4DBF900B2B31FFE7006FA6A7 /* SuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessView.swift; sourceTree = "<group>"; };
+		4DEFCBEF2B3CD6D7004C9988 /* HotelNameHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelNameHeaderView.swift; sourceTree = "<group>"; };
+		4DEFCBF12B3CD700004C9988 /* DataTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTextFieldView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,8 @@
 				4DBF14A92B3CD23400799468 /* TileView.swift */,
 				4DBF14AB2B3CD27E00799468 /* PriceView.swift */,
 				4DBF14AF2B3CD35600799468 /* DataView.swift */,
+				4DEFCBEF2B3CD6D7004C9988 /* HotelNameHeaderView.swift */,
+				4DEFCBF12B3CD700004C9988 /* DataTextFieldView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -283,7 +289,9 @@
 				4DBBB06A2B320DD3005130A0 /* BasicDataView.swift in Sources */,
 				4DBF14AE2B3CD2C600799468 /* RoomView.swift in Sources */,
 				4DBF8FF32B31D548006FA6A7 /* Hotel.swift in Sources */,
+				4DEFCBF02B3CD6D7004C9988 /* HotelNameHeaderView.swift in Sources */,
 				4DBF14AC2B3CD27E00799468 /* PriceView.swift in Sources */,
+				4DEFCBF22B3CD700004C9988 /* DataTextFieldView.swift in Sources */,
 				4DBF14A42B3C4B1600799468 /* CoordinatorView.swift in Sources */,
 				4DBF14B42B3CD3F100799468 /* TouristDataView.swift in Sources */,
 				4D0DED9C2B348BEA00DCADA2 /* DataManager.swift in Sources */,

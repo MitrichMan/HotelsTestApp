@@ -17,24 +17,22 @@ struct BasicDataView: View {
     var body: some View {
         ZStack {
             Color.white
-            VStack(spacing: 8) {
+            VStack(spacing: 0) {
                 
                 CarouselView(imageUrls: hotel.imageUrls)
-                    .padding(.bottom, 8)
+                
                 HotelNameHeaderView(
                     rating: hotel.rating,
                     ratingName: hotel.ratingName,
                     hotelName: hotel.name,
                     adress: hotel.adress
                 )
-                .padding(.bottom, 8)
                 
                 PriceView(
                     price: "От \(hotel.minimalPrice) ₽",
                     pricePer: hotel.priceForIt
                 )
             }
-            .padding()
         }
         .clipShape(
             .rect(

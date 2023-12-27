@@ -52,11 +52,13 @@ struct TouristDataView: View {
                             ) { name in
                                 
                                 DataTextFieldView(
-                                    fieldName: name.rawValue,
-                                    text: .constant(DataManager.shared.prepareTouristData(
-                                        name: name,
-                                        data: tourists[index]
-                                    ))
+                                    text: .constant(
+                                        DataManager.shared.prepareTouristData(
+                                            name: name,
+                                            data: tourists[index]
+                                        )
+                                    ),
+                                    fieldName: name.rawValue
                                 )
                             }
                         }
