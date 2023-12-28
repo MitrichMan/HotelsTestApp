@@ -46,7 +46,9 @@ struct CarouselView: View {
             .padding(.top)
             .padding(.horizontal)
             
-            .onAppear(perform:  {viewModel.fetchImages(from: imageUrls) })
+                        .onAppear(perform:  {
+            viewModel.fetchImages(from: imageUrls)
+        })
             .onChange(of: imageUrls) {
                 viewModel.fetchImages(from: imageUrls)
             }

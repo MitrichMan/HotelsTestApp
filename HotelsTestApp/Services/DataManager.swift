@@ -31,8 +31,9 @@ class DataManager: ObservableObject {
     ]
     
     let customerData = CustomerData(
-        phone: "+7 (951) 555-99-00",
+        phone: "",
         email: "examplemail.000@mail.ru"
+        //        +7 (951) 555-99-00
     )
     
     var tourists: [Tourist] = [Tourist(

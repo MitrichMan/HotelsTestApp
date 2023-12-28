@@ -36,6 +36,7 @@
 		4DBF900C2B31FFE7006FA6A7 /* SuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF900B2B31FFE7006FA6A7 /* SuccessView.swift */; };
 		4DEFCBF02B3CD6D7004C9988 /* HotelNameHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEFCBEF2B3CD6D7004C9988 /* HotelNameHeaderView.swift */; };
 		4DEFCBF22B3CD700004C9988 /* DataTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEFCBF12B3CD700004C9988 /* DataTextFieldView.swift */; };
+		4DEFCBF72B3D9AFD004C9988 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEFCBF62B3D9AFD004C9988 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +70,7 @@
 		4DBF900B2B31FFE7006FA6A7 /* SuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessView.swift; sourceTree = "<group>"; };
 		4DEFCBEF2B3CD6D7004C9988 /* HotelNameHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelNameHeaderView.swift; sourceTree = "<group>"; };
 		4DEFCBF12B3CD700004C9988 /* DataTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTextFieldView.swift; sourceTree = "<group>"; };
+		4DEFCBF62B3D9AFD004C9988 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,7 +134,9 @@
 		4DBF8FE32B31C84B006FA6A7 /* HotelsTestApp */ = {
 			isa = PBXGroup;
 			children = (
+				4DEFCBF32B3D9ACD004C9988 /* Extensions */,
 				4DBF8FE42B31C84B006FA6A7 /* HotelsTestAppApp.swift */,
+				4DBF14A52B3C4B2A00799468 /* Coordinator */,
 				4DBF8FF72B31D98B006FA6A7 /* HotelView */,
 				4DBF8FFC2B31D9DE006FA6A7 /* RoomsView */,
 				4DBF90022B31DA2D006FA6A7 /* BookingView */,
@@ -141,7 +145,6 @@
 				4DBF8FF62B31D871006FA6A7 /* Models */,
 				4DBF14A82B3CD1F100799468 /* UI */,
 				4DBF90072B31DAA3006FA6A7 /* Services */,
-				4DBF14A52B3C4B2A00799468 /* Coordinator */,
 				4DBF8FE82B31C84E006FA6A7 /* Assets.xcassets */,
 				4DBF8FEA2B31C84E006FA6A7 /* Preview Content */,
 			);
@@ -212,6 +215,14 @@
 				4DBF900B2B31FFE7006FA6A7 /* SuccessView.swift */,
 			);
 			path = SuccessView;
+			sourceTree = "<group>";
+		};
+		4DEFCBF32B3D9ACD004C9988 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4DEFCBF62B3D9AFD004C9988 /* Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -311,6 +322,7 @@
 				4D0DEDA22B35C31100DCADA2 /* CarouselViewModel.swift in Sources */,
 				4DBF8FFB2B31D9C2006FA6A7 /* HotelViewModel.swift in Sources */,
 				4DBF14B62B3CD42E00799468 /* AddTouristView.swift in Sources */,
+				4DEFCBF72B3D9AFD004C9988 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

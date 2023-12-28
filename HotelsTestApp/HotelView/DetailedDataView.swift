@@ -25,6 +25,8 @@ struct DetailedDataView: View {
                     Spacer()
                 }
                 
+                
+                
                 HStack {
                     TileStackView(
                         content: hotel.aboutTheHotel.peculiarities,
@@ -50,7 +52,6 @@ struct DetailedDataView: View {
     }
 }
 
-// MARK: Preview
 #Preview {
     DetailedDataView(
         hotel: Hotel(

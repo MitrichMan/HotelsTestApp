@@ -10,6 +10,7 @@ import SwiftUI
 struct DataTextFieldView: View {
     @Binding var text: String
     let fieldName: String
+    @State var phoneNumber: String = ""
     
     var body: some View {
         ZStack {
@@ -18,10 +19,17 @@ struct DataTextFieldView: View {
                 HStack {
                     Text(fieldName)
                         .foregroundStyle(.gray)
+                    
                     Spacer()
                 }
-                TextField("00000000", text: $text)
+//                +7 (000)-000-00-00
+                TextField("", text: $phoneNumber)
                     .keyboardType(.phonePad)
+                    .onChange(of: phoneNumber) {
+                        if !phoneNumber.isEmpty {
+                            phoneNumber = phoneNumber.formatPhoneNumber()
+                        }
+                    }
             }
             .padding(.vertical, 10)
             .padding(.horizontal, 16)
