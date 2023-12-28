@@ -110,7 +110,10 @@ struct TextFieldContainer: UIViewRepresentable {
 class FilterPhoneNumber: ObservableObject {
         
     static func format(phone: String, mask: String) -> String {
-        let filteredPhoneNumber = phone.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+        let filteredPhoneNumber = phone.replacingOccurrences(
+            of: "[^0-9]", with: "",
+            options: .regularExpression
+        )
         var result = ""
         var index = filteredPhoneNumber.startIndex
         
