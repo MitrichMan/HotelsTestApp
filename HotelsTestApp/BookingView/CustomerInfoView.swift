@@ -23,12 +23,14 @@ struct CustomerInfoView: View {
                 
                 DataTextFieldView(
                     text: $phone, 
-                    fieldName: "Номер телефона"
+                    fieldName: "Номер телефона", 
+                    fieldFormat: .phoneNumber
                 )
                 
                 DataTextFieldView(
                     text: $email, 
-                    fieldName: "Почта"
+                    fieldName: "Почта", 
+                    fieldFormat: .string
                 )
                 
                 Text("Эти данные никому не передаются. После оплаты мы вышли чек на указанный вами номер и почту")

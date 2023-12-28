@@ -160,3 +160,9 @@ enum PresentationMode {
     case narrow
     case wide
 }
+
+enum FieldFormat {
+    case string
+    case number
+    case phoneNumber
+}

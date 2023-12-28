@@ -23,7 +23,7 @@ struct BookingView: View {
                                     hotelName: viewModel.bookingData.hotelName,
                                     adress: viewModel.bookingData.hotelAdress
                                 )
-                                
+                                                                
                                 DataView(
                                     data: viewModel.prepareBookingDataViewData(
                                         names: viewModel.bookingDataNames

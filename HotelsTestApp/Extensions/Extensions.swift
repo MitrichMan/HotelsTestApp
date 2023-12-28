@@ -11,17 +11,14 @@ extension String {
     func formatPhoneNumber() -> String {
         let cleanNumber = components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
         
-        let mask = "+Y (XXX) XXX-XX-XX"
+        let mask = "+* (***) ***-**-**"
         
         var result = ""
         var startIndex = cleanNumber.startIndex
         let endIndex = cleanNumber.endIndex
         
         for char in mask where startIndex < endIndex {
-            if char == "Y" {
-                result.append("7")
-                startIndex = cleanNumber.index(after: startIndex)
-            } else if char == "X" {
+            if char == "*" {
                 result.append(cleanNumber[startIndex])
                 startIndex = cleanNumber.index(after: startIndex)
             } else {
@@ -29,6 +26,6 @@ extension String {
             }
         }
         
-        return result
+        return result + mask.dropFirst(result.count)
     }
 }

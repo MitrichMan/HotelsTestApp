@@ -58,7 +58,8 @@ struct TouristDataView: View {
                                             data: tourists[index]
                                         )
                                     ),
-                                    fieldName: name.rawValue
+                                    fieldName: name.rawValue, 
+                                    fieldFormat: .string
                                 )
                             }
                         }
