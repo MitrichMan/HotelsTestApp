@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct DataTextFieldView: View {
-    @Binding var text: String
+    @State var text: String
     let fieldName: String
     let fieldFormat: FieldFormat
     
-    @State private var phoneNumber: String = "+7 (***) ***-**-**"
+//    @State private var phoneNumber: String = "+7"// (***) ***-**-**"
 
     var body: some View {
         ZStack {
@@ -27,30 +27,23 @@ struct DataTextFieldView: View {
                 
                 if fieldFormat == .phoneNumber {
                     
-//                    let textChangedBinding = Binding<String>(
-//                        get: {
-//                            FilterPhoneNumber.format(
-//                                phone: self.phoneNumber,
-//                                mask: "+* (***) ***-**-**"
-//                            )
-//                        },
-//
-//                        set: {
-//                            self.phoneNumber = $0
-//                        }
-//                    )
-//                    TextFieldContainer(placeholder: "+7 (***) ***-**-**", text: $phoneNumber)
-                    
-                    TextField("+7 (***) ***-**-**", text: $phoneNumber)
-                        .keyboardType(.phonePad)
-                        .onAppear(perform: {
-                            phoneNumber = text
-                        })
-//                    
-                        .onChange(of: phoneNumber) {
-                            chooseFormatting(for: fieldFormat)
-                            text = phoneNumber
+                    let textChangedBinding = Binding<String>(
+                        get: {
+                            FilterPhoneNumber.format(
+                                phone: self.text,
+                                mask: "+* (***) ***-**-**"
+                            )
+                        },
+                        set: {
+                            self.text = $0
                         }
+                    )
+                    
+                    TextFieldContainer(
+                        placeholder: "+7 (***) ***-**-**",
+                        text: textChangedBinding
+                    )
+                    
                 } else {
                     TextField("", text: $text)
                 }
@@ -63,20 +56,11 @@ struct DataTextFieldView: View {
         .padding(.horizontal)
         .padding(.top, 16)
     }
-    
-    func chooseFormatting(for field: FieldFormat) {
-        if field == .phoneNumber {
-            if !phoneNumber.isEmpty {
-                phoneNumber = phoneNumber.formatPhoneNumber()
-                text = phoneNumber
-            }
-        }
-    }
 }
 
 #Preview {
     DataTextFieldView(
-        text: .constant("+7 (***) ***-**-**"),
+        text: "7",
         fieldName: "Phone Number",
         fieldFormat: .phoneNumber
     )
@@ -86,18 +70,25 @@ struct DataTextFieldView: View {
 struct TextFieldContainer: UIViewRepresentable {
         
     private var placeholder: String
-    private var text: Binding<String>
+    var text: Binding<String>
     
     init(placeholder: String, text: Binding<String>) {
         self.placeholder = placeholder
         self.text = text
     }
     
+    func makeCoordinator() -> TextFieldCoordinator {
+        TextFieldCoordinator(self)
+    }
+    
     func makeUIView(context: UIViewRepresentableContext<TextFieldContainer>) -> UITextField {
         let innerTextField = UITextField(frame: .zero)
         innerTextField.placeholder = placeholder
         innerTextField.text = text.wrappedValue
+        innerTextField.delegate = context.coordinator
         innerTextField.keyboardType = .phonePad
+        
+        context.coordinator.setup(innerTextField)
         
         return innerTextField
     }
@@ -128,3 +119,25 @@ class FilterPhoneNumber: ObservableObject {
         return result + mask.dropFirst(result.count)
     }
 }
+
+class TextFieldCoordinator: NSObject, UITextFieldDelegate {
+       var parent: TextFieldContainer
+
+       init(_ textFieldContainer: TextFieldContainer) {
+           self.parent = textFieldContainer
+       }
+
+       func setup(_ textField: UITextField) {
+           textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+       }
+
+       @objc func textFieldDidChange(_ textField: UITextField) {
+           self.parent.text.wrappedValue = textField.text ?? ""
+
+           let newPosition = textField.endOfDocument
+           textField.selectedTextRange = textField.textRange(
+            from: newPosition,
+            to: newPosition
+           )
+       }
+   }
