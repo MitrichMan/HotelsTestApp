@@ -12,8 +12,6 @@ struct DataTextFieldView: View {
     let fieldName: String
     let fieldFormat: FieldFormat
     
-//    @State private var phoneNumber: String = "+7"// (***) ***-**-**"
-
     var body: some View {
         ZStack {
             Color.background
@@ -72,7 +70,10 @@ struct TextFieldContainer: UIViewRepresentable {
     private var placeholder: String
     var text: Binding<String>
     
-    init(placeholder: String, text: Binding<String>) {
+    init(
+        placeholder: String,
+        text: Binding<String>
+    ) {
         self.placeholder = placeholder
         self.text = text
     }
@@ -116,7 +117,7 @@ class FilterPhoneNumber: ObservableObject {
                 result.append(character)
             }
         }
-        return result + mask.dropFirst(result.count)
+        return result
     }
 }
 
