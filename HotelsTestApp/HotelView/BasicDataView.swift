@@ -6,14 +6,11 @@
 //
 
 import SwiftUI
-import Combine
 
 struct BasicDataView: View {
     
     var hotel: Hotel
-    
-    let objectWillChange = ObservableObjectPublisher()
-    
+        
     var body: some View {
         ZStack {
             Color.white

@@ -21,13 +21,10 @@ class CarouselViewModel: ObservableObject {
     
     @MainActor func fetchImages(from urls: [String]) {
         Task {
-//            var fetchedImages: [UIImage] = []
             for url in urls {
                 guard let image = await fetchImage(from: url) else { continue }
-//                fetchedImages.append(image)
                 images.append(image)
             }
-//            images = fetchedImages
         }
     }
     

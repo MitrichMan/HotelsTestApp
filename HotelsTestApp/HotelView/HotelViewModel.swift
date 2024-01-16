@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Combine
 
 class HotelViewModel: ObservableObject {
     
@@ -30,9 +29,7 @@ class HotelViewModel: ObservableObject {
     }
     
     let buttons = DataManager.shared.buttons
-        
-    let objectWillChange = ObservableObjectPublisher()
-    
+            
     @MainActor func fetchHotel() async {
         do {
             hotel = try await NetworkManager.shared.fetchHotel()

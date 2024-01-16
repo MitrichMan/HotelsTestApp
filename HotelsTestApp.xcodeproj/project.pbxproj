@@ -37,6 +37,9 @@
 		4DBF90062B31DA61006FA6A7 /* BookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF90052B31DA61006FA6A7 /* BookingViewModel.swift */; };
 		4DBF90092B31DAD5006FA6A7 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF90082B31DAD5006FA6A7 /* NetworkManager.swift */; };
 		4DBF900C2B31FFE7006FA6A7 /* SuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF900B2B31FFE7006FA6A7 /* SuccessView.swift */; };
+		4DE5C7AA2B5047D700E7C296 /* DataTextFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE5C7A92B5047D700E7C296 /* DataTextFieldViewModel.swift */; };
+		4DE5C7AC2B504A9900E7C296 /* TextFieldContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE5C7AB2B504A9900E7C296 /* TextFieldContainer.swift */; };
+		4DE5C7AE2B504AEF00E7C296 /* TextFieldCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE5C7AD2B504AEF00E7C296 /* TextFieldCoordinator.swift */; };
 		4DEFCBF02B3CD6D7004C9988 /* HotelNameHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEFCBEF2B3CD6D7004C9988 /* HotelNameHeaderView.swift */; };
 		4DEFCBF22B3CD700004C9988 /* DataTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEFCBF12B3CD700004C9988 /* DataTextFieldView.swift */; };
 		4DEFCBF72B3D9AFD004C9988 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEFCBF62B3D9AFD004C9988 /* Extensions.swift */; };
@@ -74,6 +77,9 @@
 		4DBF90052B31DA61006FA6A7 /* BookingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewModel.swift; sourceTree = "<group>"; };
 		4DBF90082B31DAD5006FA6A7 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		4DBF900B2B31FFE7006FA6A7 /* SuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessView.swift; sourceTree = "<group>"; };
+		4DE5C7A92B5047D700E7C296 /* DataTextFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTextFieldViewModel.swift; sourceTree = "<group>"; };
+		4DE5C7AB2B504A9900E7C296 /* TextFieldContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldContainer.swift; sourceTree = "<group>"; };
+		4DE5C7AD2B504AEF00E7C296 /* TextFieldCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCoordinator.swift; sourceTree = "<group>"; };
 		4DEFCBEF2B3CD6D7004C9988 /* HotelNameHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelNameHeaderView.swift; sourceTree = "<group>"; };
 		4DEFCBF12B3CD700004C9988 /* DataTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTextFieldView.swift; sourceTree = "<group>"; };
 		4DEFCBF62B3D9AFD004C9988 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -116,7 +122,6 @@
 				4DBF14AB2B3CD27E00799468 /* PriceView.swift */,
 				4DBF14AF2B3CD35600799468 /* DataView.swift */,
 				4DEFCBEF2B3CD6D7004C9988 /* HotelNameHeaderView.swift */,
-				4DEFCBF12B3CD700004C9988 /* DataTextFieldView.swift */,
 				4D13FFFE2B3DD970009FA35F /* TableWithButtonsView.swift */,
 				4D1300022B3DDA87009FA35F /* ListRowView.swift */,
 				4D1300042B3DDB55009FA35F /* TileStackView.swift */,
@@ -153,6 +158,7 @@
 				4DBF900A2B31FFB9006FA6A7 /* SuccessView */,
 				4DBF8FF62B31D871006FA6A7 /* Models */,
 				4DBF14A82B3CD1F100799468 /* UI */,
+				4DE5C7A82B50479700E7C296 /* TextFieldView */,
 				4DBF90072B31DAA3006FA6A7 /* Services */,
 				4DBF8FE82B31C84E006FA6A7 /* Assets.xcassets */,
 				4DBF8FEA2B31C84E006FA6A7 /* Preview Content */,
@@ -224,6 +230,17 @@
 				4DBF900B2B31FFE7006FA6A7 /* SuccessView.swift */,
 			);
 			path = SuccessView;
+			sourceTree = "<group>";
+		};
+		4DE5C7A82B50479700E7C296 /* TextFieldView */ = {
+			isa = PBXGroup;
+			children = (
+				4DEFCBF12B3CD700004C9988 /* DataTextFieldView.swift */,
+				4DE5C7A92B5047D700E7C296 /* DataTextFieldViewModel.swift */,
+				4DE5C7AB2B504A9900E7C296 /* TextFieldContainer.swift */,
+				4DE5C7AD2B504AEF00E7C296 /* TextFieldCoordinator.swift */,
+			);
+			path = TextFieldView;
 			sourceTree = "<group>";
 		};
 		4DEFCBF32B3D9ACD004C9988 /* Extensions */ = {
@@ -306,10 +323,13 @@
 			files = (
 				4DBF14A22B3C476D00799468 /* Coordinator.swift in Sources */,
 				4DBF90042B31DA51006FA6A7 /* BookingView.swift in Sources */,
+				4DE5C7AE2B504AEF00E7C296 /* TextFieldCoordinator.swift in Sources */,
 				4DBBB06A2B320DD3005130A0 /* BasicDataView.swift in Sources */,
 				4DBF14AE2B3CD2C600799468 /* RoomView.swift in Sources */,
+				4DE5C7AC2B504A9900E7C296 /* TextFieldContainer.swift in Sources */,
 				4DBF8FF32B31D548006FA6A7 /* Hotel.swift in Sources */,
 				4DEFCBF02B3CD6D7004C9988 /* HotelNameHeaderView.swift in Sources */,
+				4DE5C7AA2B5047D700E7C296 /* DataTextFieldViewModel.swift in Sources */,
 				4D1300052B3DDB55009FA35F /* TileStackView.swift in Sources */,
 				4DBF14AC2B3CD27E00799468 /* PriceView.swift in Sources */,
 				4DEFCBF22B3CD700004C9988 /* DataTextFieldView.swift in Sources */,

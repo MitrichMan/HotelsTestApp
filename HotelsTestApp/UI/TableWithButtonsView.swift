@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// MARK: ButtonsView
 struct TableWithButtonsView: View {
     let buttons: [HotelButton]
     
