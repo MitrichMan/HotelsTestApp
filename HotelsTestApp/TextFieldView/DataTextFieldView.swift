@@ -30,32 +30,18 @@ struct DataTextFieldView: View {
                     
                     TextFieldContainer(
                         placeholder: "+7 (***) ***-**-**",
-                        text: $viewModel.formarttedPhoneNumber
+                        text: viewModel.formattedPhoneNumber
                     )
-                    .onAppear(perform: {
-                        viewModel.formarttedPhoneNumber = text
-                    })
-
-                    //                    let textChangedBinding = Binding<String>(
-                    //                        get: {
-                    //                            viewModel.format(
-                    //                                phone: self.text,
-                    //                                mask: "+* (***) ***-**-**"
-                    //                            )
-                    //                        },
-                    //                        set: {
-                    //                            self.text = $0
-                    //                            print(text)
-                    //                        }
-                    //                    )
-                    //
-                    //                    TextFieldContainer(
-                    //                        placeholder: "+7 (***) ***-**-**",
-                    //                        text: textChangedBinding
-                    //                    )
                     
-                } else {
-                    TextField("", text: $text)
+                    .onAppear(perform: {
+                        viewModel.formattedPhoneNumber = text
+                    })
+                    .onChange(of: text) {
+                        text = viewModel.formattedPhoneNumber
+                    }
+                    
+                } else { Text("1234")
+//                    TextField("", text: text)
                 }
             }
             .padding(.vertical, 10)

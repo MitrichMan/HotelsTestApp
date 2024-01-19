@@ -5,22 +5,17 @@
 //  Created by Dmitrii Melnikov on 11.01.2024.
 //
 
-import Foundation
+//import Foundation
+import UIKit
 
 class DataTextFieldViewModel: ObservableObject {
-    
-//    var text = "" {
-//        didSet {
-//            formarttedPhoneNumber = text
-//        }
-//    }
 
-    @Published var formarttedPhoneNumber = "" {
+    @Published var formattedPhoneNumber = "" {
         didSet {
-            let formattedText = format(phone: formarttedPhoneNumber, mask: "+* (***) ***-**-**")
+            let formattedText = format(phone: formattedPhoneNumber, mask: "+* (***) ***-**-**")
             
-            if formarttedPhoneNumber != formattedText {
-                formarttedPhoneNumber = formattedText
+            if formattedPhoneNumber != formattedText {
+                formattedPhoneNumber = formattedText
             }
         }
     }
@@ -51,9 +46,8 @@ class DataTextFieldViewModel: ObservableObject {
         return result + mask.dropFirst(result.count)
     }
     
-    func setCursor(text: String) {
-        
-        
+    func setCursor(in text: String) {
+       
     }
 }
 
