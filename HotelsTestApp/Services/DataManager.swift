@@ -30,8 +30,8 @@ class DataManager: ObservableObject {
         )
     ]
     
-    let customerData = CustomerData(
-        phone: "7",
+    var customer = Customer(
+        phone: "",
         email: ""
     )
     
@@ -44,7 +44,7 @@ class DataManager: ObservableObject {
         passportExpirationDate: ""
     )] 
     
-    let bookingDataNames: [BookingDataFieldName] = [
+    let bookingDataFieldNames: [BookingDataFieldName] = [
         .departure,
         .arrivalCountry,
         .dates,
@@ -53,6 +53,12 @@ class DataManager: ObservableObject {
         .room,
         .nutrition
     ]
+    
+    let customerDataFieldNames: [CustomerDataFieldName] = [
+        .phone,
+        .email
+    ]
+    
     
     let touristDataFieldNames: [TouristDataFieldName] = [
         .name,
@@ -63,7 +69,7 @@ class DataManager: ObservableObject {
         .passportExpirationDate
     ]
     
-    let finalPriceNames: [BookingDataFieldName] = [
+    let finalPriceFieldNames: [BookingDataFieldName] = [
         .tourPrice,
         .fuelCharge,
         .serviceCharge,
@@ -119,6 +125,11 @@ class DataManager: ObservableObject {
         }
     }
     
+    func makeCustomer(phone: String, email: String) {
+        customer.phone = phone
+        customer.email = email
+    }
+    
     func addTourist() {
         tourists.append(Tourist(
             name: "",
@@ -146,6 +157,11 @@ enum BookingDataFieldName: String {
     case totalPrice = "К оплате"
 }
 
+enum CustomerDataFieldName: String {
+    case phone = "Номер телефона"
+    case email = "Электронная почта"
+}
+
 enum TouristDataFieldName: String {
     case name = "Имя"
     case lastName = "Фамилия"
@@ -164,4 +180,5 @@ enum FieldFormat {
     case string
     case number
     case phoneNumber
+    case email
 }

@@ -22,26 +22,31 @@ struct DataTextFieldView: View {
                 HStack {
                     Text(fieldName)
                         .foregroundStyle(.gray)
+                        .onTapGesture {
+                            viewModel.isRedacted = true
+                        }
                     
                     Spacer()
                 }
                 
-                if fieldFormat == .phoneNumber {
-                    
+                if viewModel.isRedacted {
                     TextFieldContainer(
-                        placeholder: "+7 (***) ***-**-**",
-                        text: viewModel.formattedPhoneNumber
+                        placeholder: viewModel.placeholder,
+                        text: viewModel.text,
+                        fieldFormat: fieldFormat
                     )
+                    .transition(AnyTransition(.scale))
+                }
                     
-                    .onAppear(perform: {
-                        viewModel.formattedPhoneNumber = text
-                    })
-                    .onChange(of: text) {
-                        text = viewModel.formattedPhoneNumber
-                    }
-                    
-                } else { Text("1234")
-//                    TextField("", text: text)
+            }
+            .onAppear(perform: {
+                viewModel.text = text
+                viewModel.fieldFormat = fieldFormat
+            })
+            
+            .onChange(of: text) {
+                if fieldFormat == .phoneNumber {
+                    text = viewModel.formattedPhoneNumber
                 }
             }
             .padding(.vertical, 10)
@@ -56,8 +61,8 @@ struct DataTextFieldView: View {
 
 #Preview {
     DataTextFieldView(
-        text: "7",
-        fieldName: "Phone Number",
-        fieldFormat: .phoneNumber
+        text: "",
+        fieldName: CustomerDataFieldName.email.rawValue,
+        fieldFormat: .email
     )
 }

@@ -30,18 +30,18 @@ struct TouristDataView: View {
                             } label: {
                                 Image(
                                     systemName: tourists[index].isPresented
-                                      ? "chevron.up"
-                                      : "chevron.down"
+                                    ? "chevron.up"
+                                    : "chevron.down"
                                 )
-                                    .padding(.vertical, 10)
-                                    .padding(.horizontal, 7)
-                                    .fontWeight(.medium)
-                                    .font(.system(size: 22))
-                                    .foregroundColor(.aboutTheRoomForeground)
-                                    .background(.aboutTheRoomBackground)
-                                    .cornerRadius(6)
+                                .padding(.vertical, 10)
+                                .padding(.horizontal, 7)
+                                .fontWeight(.medium)
+                                .font(.system(size: 22))
+                                .foregroundColor(.aboutTheRoomForeground)
+                                .background(.aboutTheRoomBackground)
+                                .cornerRadius(6)
                             }
-
+                            
                         }
                         .padding(.horizontal)
                         
@@ -56,8 +56,8 @@ struct TouristDataView: View {
                                         DataManager.shared.prepareTouristData(
                                             name: name,
                                             data: tourists[index]
-                                    ),
-                                    fieldName: name.rawValue, 
+                                        ),
+                                    fieldName: name.rawValue,
                                     fieldFormat: .string
                                 )
                             }

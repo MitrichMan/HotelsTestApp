@@ -47,10 +47,10 @@ final class BookingViewModel: ObservableObject {
     
     let bookingDataViewData: [DataViewData] = []
     
-    var customerData = DataManager.shared.customerData
+    var customer = DataManager.shared.customer
     
-    let bookingDataNames = DataManager.shared.bookingDataNames
-    let finalPriceNames = DataManager.shared.finalPriceNames
+    let bookingDataNames = DataManager.shared.bookingDataFieldNames
+    let finalPriceNames = DataManager.shared.finalPriceFieldNames
     
     
     

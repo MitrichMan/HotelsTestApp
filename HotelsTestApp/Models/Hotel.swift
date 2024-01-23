@@ -83,7 +83,7 @@ struct Tourist {
     }
 }
 
-struct CustomerData {
+struct Customer {
     var phone: String
     var email: String
 }

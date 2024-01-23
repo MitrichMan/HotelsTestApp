@@ -30,7 +30,7 @@ struct BookingView: View {
                                     )
                                 )
                                 
-                                CustomerInfoView(phone: $viewModel.customerData.phone, email: $viewModel.customerData.email)
+                                CustomerInfoView(phone: $viewModel.customer.phone, email: $viewModel.customer.email)
                                 
                                 TouristDataView(tourists: $viewModel.tourists)
                                 

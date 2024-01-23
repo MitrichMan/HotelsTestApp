@@ -21,17 +21,13 @@ struct CustomerInfoView: View {
                     .padding(.horizontal)
                     .padding(.top)
                 
-                DataTextFieldView(
-                    text: phone,
-                    fieldName: "Номер телефона",
-                    fieldFormat: .phoneNumber
-                )
-                
-                DataTextFieldView(
-                    text: email, 
-                    fieldName: "Почта", 
-                    fieldFormat: .string
-                )
+                ForEach(DataManager.shared.customerDataFieldNames, id: \.self) { name in
+                    DataTextFieldView(
+                        text: phone,
+                        fieldName: name.rawValue,
+                        fieldFormat: chooseFieldFormat(for: name)
+                    )
+                }
                 
                 Text("Эти данные никому не передаются. После оплаты мы вышли чек на указанный вами номер и почту")
                     .foregroundStyle(.gray)
@@ -40,5 +36,14 @@ struct CustomerInfoView: View {
             }
         }
         .cornerRadius(12)
+    }
+    
+    func chooseFieldFormat(for textFieldName: CustomerDataFieldName) -> FieldFormat {
+        switch textFieldName {
+        case .phone:
+            return .phoneNumber
+        case .email:
+            return .email
+        }
     }
 }
