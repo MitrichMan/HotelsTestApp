@@ -11,19 +11,13 @@ struct DataTextFieldView: View {
     
     @StateObject private var viewModel = DataTextFieldViewModel()
     @State var text: String = ""
-    @State var textIsValid = true {
-        didSet {
-            viewModel.textIsValid = textIsValid
-            print("TextField textIsValid = \(textIsValid)")
-        }
-    }
         
     let fieldName: String
     let fieldFormat: FieldFormat
         
     var body: some View {
         ZStack {
-            Color.background
+            Color(viewModel.backgroundColor)
             VStack(alignment: .leading, spacing: 0) {
                 HStack {
                     Text(fieldName)
@@ -38,7 +32,7 @@ struct DataTextFieldView: View {
                 
                 if viewModel.isFocused {
                     TextFieldContainer(
-                        textIsValid: $textIsValid,
+                        textIsValid: $viewModel.textIsValid,
                         text: viewModel.text,
                         fieldFormat: fieldFormat,
                         placeholder: viewModel.placeholder,

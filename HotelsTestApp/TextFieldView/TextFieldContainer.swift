@@ -8,11 +8,7 @@
 import SwiftUI
 
 struct TextFieldContainer: UIViewRepresentable {
-    @Binding var textIsValid: Bool {
-        didSet {
-            print("Container textIsValid = \(textIsValid)")
-        }
-    }
+    @Binding var textIsValid: Bool 
     
     var text: String
     let fieldFormat: FieldFormat

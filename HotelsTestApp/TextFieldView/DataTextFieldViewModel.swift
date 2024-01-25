@@ -10,24 +10,23 @@ import UIKit
 
 class DataTextFieldViewModel: ObservableObject {
     
-    @Published var text = "" 
+    var text = ""
     
     @Published var placeholder = ""
 
     @Published var isFocused = false
-    
+        
     @Published var textIsValid = true {
         didSet {
             if textIsValid  {
-                backgroundColor = UIColor(named: "Background")
+                backgroundColor = UIColor(.background)
             } else {
-                backgroundColor = UIColor(named: "SystemRed")
+                backgroundColor = UIColor(.red).withAlphaComponent(0.15)
             }
-            print("VM textIsValid = \(textIsValid)")
         }
     }
     
-    var backgroundColor = UIColor(named: "Background")
+    @Published var backgroundColor = UIColor(.background)
     
     var fieldFormat: FieldFormat = .string {
         didSet {

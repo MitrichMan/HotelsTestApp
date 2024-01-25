@@ -10,11 +10,7 @@ import UIKit
 class TextFieldCoordinator: NSObject, UITextFieldDelegate {
     var parent: TextFieldContainer
     
-    var textIsValid = true {
-        didSet {
-            print("Coordinator textIsValid = \(textIsValid)")
-        }
-    }
+    var textIsValid = true 
     
     init(_ textFieldContainer: TextFieldContainer) {
         self.parent = textFieldContainer
@@ -24,7 +20,7 @@ class TextFieldCoordinator: NSObject, UITextFieldDelegate {
         if parent.fieldFormat == .phoneNumber {
             textField.addTarget(self, action: #selector(phoneNumberFieldDidChange), for: .editingChanged)
         } else {
-            textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingDidEnd)
+            textField.addTarget(self, action: #selector(textFieldDidEndChange), for: .editingDidEnd)
         }
         
     }
@@ -33,7 +29,7 @@ class TextFieldCoordinator: NSObject, UITextFieldDelegate {
         self.parent = parent
     }
     
-    @objc func textFieldDidChange(_ textField: UITextField) {
+    @objc func textFieldDidEndChange(_ textField: UITextField) {
         guard let text = textField.text else { return }
         
         textIsValid = validate(text: text)
@@ -42,11 +38,6 @@ class TextFieldCoordinator: NSObject, UITextFieldDelegate {
         
         if textIsValid {
             self.parent.text = text
-            textField.backgroundColor = .background
-            print("valid")
-        } else {
-            textField.backgroundColor = .red
-            print("invalid")
         }
     }
     
