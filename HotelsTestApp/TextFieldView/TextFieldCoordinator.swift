@@ -10,6 +10,12 @@ import UIKit
 class TextFieldCoordinator: NSObject, UITextFieldDelegate {
     var parent: TextFieldContainer
     
+    var textIsValid = true {
+        didSet {
+            print("Coordinator textIsValid = \(textIsValid)")
+        }
+    }
+    
     init(_ textFieldContainer: TextFieldContainer) {
         self.parent = textFieldContainer
     }
@@ -18,8 +24,9 @@ class TextFieldCoordinator: NSObject, UITextFieldDelegate {
         if parent.fieldFormat == .phoneNumber {
             textField.addTarget(self, action: #selector(phoneNumberFieldDidChange), for: .editingChanged)
         } else {
-            textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+            textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingDidEnd)
         }
+        
     }
     
     func updateParent(_ parent : TextFieldContainer) {
@@ -28,13 +35,23 @@ class TextFieldCoordinator: NSObject, UITextFieldDelegate {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         guard let text = textField.text else { return }
-        self.parent.text = text
+        
+        textIsValid = validate(text: text)
+        
+        self.parent.textIsValid = textIsValid
+        
+        if textIsValid {
+            self.parent.text = text
+            textField.backgroundColor = .background
+            print("valid")
+        } else {
+            textField.backgroundColor = .red
+            print("invalid")
+        }
     }
     
     @objc func phoneNumberFieldDidChange(_ textField: UITextField) {
         guard let text = textField.text else { return }
-        
-        self.parent.text = text
         
         let phoneNumber = formatTextToPhoneNumber(phone: text, mask: "+* (***) ***-**-**")
         
@@ -42,8 +59,20 @@ class TextFieldCoordinator: NSObject, UITextFieldDelegate {
             textField.text = phoneNumber
         }
         
+        self.parent.text = phoneNumber
+        
         setCursor(in: textField)
-//        print("parent.text \(parent.text)")
+    }
+    
+    func validate(text: String/*, regex: String*/) -> Bool {
+        if text.count > 100 {
+            return false
+        }
+        
+//        let emailRegex = "^(?=([a-z0-9+`_.-]*[a-z0-9+`_-]+@(([a-z0-9]+[a-z0-9_.-]*[a-z0-9]+)|[a-z0-9])\\.[a-z]{2,})$)(?!(.*\\.{2,}.*))(?!(.*@.*((\\.-)|(-\\.)).*))"
+        let emailRegex = "(?:[\\p{L}0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[\\p{L}0-9!#$%\\&'*+/=?\\^_`{|}" + "~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\" + "x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[\\p{L}0-9](?:[a-" + "z0-9-]*[\\p{L}0-9])?\\.)+[\\p{L}0-9](?:[\\p{L}0-9-]*[\\p{L}0-9])?|\\[(?:(?:25[0-5" + "]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-" + "9][0-9]?|[\\p{L}0-9-]*[\\p{L}0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21" + "-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"
+        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegex)
+        return emailPredicate.evaluate(with: text)
     }
     
     private func formatTextToPhoneNumber(phone: String, mask: String) -> String {
@@ -68,6 +97,7 @@ class TextFieldCoordinator: NSObject, UITextFieldDelegate {
                 result.append(character)
             }
         }
+
         return result + mask.dropFirst(result.count)
     }
     

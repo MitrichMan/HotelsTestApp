@@ -8,19 +8,30 @@
 import SwiftUI
 
 struct TextFieldContainer: UIViewRepresentable {
+    @Binding var textIsValid: Bool {
+        didSet {
+            print("Container textIsValid = \(textIsValid)")
+        }
+    }
+    
     var text: String
     let fieldFormat: FieldFormat
     var placeholder: String
+    var isFirstResponder: Bool
     
-    init(
-        placeholder: String,
-        text: String,
-        fieldFormat: FieldFormat
-    ) {
-        self.placeholder = placeholder
-        self.text = text
-        self.fieldFormat = fieldFormat
-    }
+//    init(
+//        placeholder: String,
+//        text: String,
+//        fieldFormat: FieldFormat,
+//        isFirstResponder: Bool,
+//        textIsValid: Bool
+//    ) {
+//        self.placeholder = placeholder
+//        self.text = text
+//        self.fieldFormat = fieldFormat
+//        self.isFirstResponder = isFirstResponder
+//        self.textIsValid = textIsValid
+//    }
     
     func makeCoordinator() -> TextFieldCoordinator {
         TextFieldCoordinator(self)
@@ -31,15 +42,30 @@ struct TextFieldContainer: UIViewRepresentable {
         innerTextField.placeholder = placeholder
         innerTextField.text = text
         innerTextField.delegate = context.coordinator
-        innerTextField.keyboardType = .phonePad
         
+        switch fieldFormat {
+            case .phoneNumber:
+            innerTextField.keyboardType = .phonePad
+        case .string:
+            innerTextField.keyboardType = .default
+        case .number:
+            innerTextField.keyboardType = .numberPad
+        case .email:
+            innerTextField.keyboardType = .emailAddress
+        }
+
         context.coordinator.setup(innerTextField)
                 
         return innerTextField
     }
-
+    
     func updateUIView(_ uiView: UITextField, context: UIViewRepresentableContext<TextFieldContainer>) {
         uiView.text = self.text
         context.coordinator.updateParent(self)
+        
+        switch isFirstResponder {
+        case true: uiView.becomeFirstResponder()
+        case false: uiView.resignFirstResponder()
+        }
     }
 }

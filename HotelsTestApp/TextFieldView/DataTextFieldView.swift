@@ -11,7 +11,13 @@ struct DataTextFieldView: View {
     
     @StateObject private var viewModel = DataTextFieldViewModel()
     @State var text: String = ""
-    
+    @State var textIsValid = true {
+        didSet {
+            viewModel.textIsValid = textIsValid
+            print("TextField textIsValid = \(textIsValid)")
+        }
+    }
+        
     let fieldName: String
     let fieldFormat: FieldFormat
         
@@ -22,23 +28,27 @@ struct DataTextFieldView: View {
                 HStack {
                     Text(fieldName)
                         .foregroundStyle(.gray)
+                        .transition(.slide)
                         .onTapGesture {
-                            viewModel.isRedacted = true
+                            viewModel.isFocused = true
                         }
                     
                     Spacer()
                 }
                 
-                if viewModel.isRedacted {
+                if viewModel.isFocused {
                     TextFieldContainer(
-                        placeholder: viewModel.placeholder,
+                        textIsValid: $textIsValid,
                         text: viewModel.text,
-                        fieldFormat: fieldFormat
+                        fieldFormat: fieldFormat,
+                        placeholder: viewModel.placeholder,
+                        isFirstResponder: viewModel.isFocused
                     )
-                    .transition(AnyTransition(.scale))
-                }
                     
+                    .transition(.slide)
+                }
             }
+            
             .onAppear(perform: {
                 viewModel.text = text
                 viewModel.fieldFormat = fieldFormat

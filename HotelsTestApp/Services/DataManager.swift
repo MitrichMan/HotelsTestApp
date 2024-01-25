@@ -182,3 +182,7 @@ enum FieldFormat {
     case phoneNumber
     case email
 }
+
+enum TextFieldTextMask: String {
+    case phone = "+* (***) ***-**-**"
+}
