@@ -10,7 +10,7 @@ import SwiftUI
 struct DataTextFieldView: View {
     
     @StateObject private var viewModel = DataTextFieldViewModel()
-    @State var text: String = ""
+    @State var text: String = "" 
         
     let fieldName: String
     let fieldFormat: FieldFormat
@@ -24,19 +24,19 @@ struct DataTextFieldView: View {
                         .foregroundStyle(.gray)
                         .transition(.slide)
                         .onTapGesture {
-                            viewModel.isFocused = true
+                            viewModel.isFirstResponder = true
                         }
                     
                     Spacer()
                 }
                 
-                if viewModel.isFocused {
+                if viewModel.isFirstResponder {
                     TextFieldContainer(
                         textIsValid: $viewModel.textIsValid,
-                        text: viewModel.text,
+                        text: $viewModel.text,
                         fieldFormat: fieldFormat,
                         placeholder: viewModel.placeholder,
-                        isFirstResponder: viewModel.isFocused
+                        isFirstResponder: viewModel.isFirstResponder
                     )
                     
                     .transition(.slide)

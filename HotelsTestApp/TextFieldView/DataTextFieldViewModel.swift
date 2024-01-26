@@ -10,13 +10,17 @@ import UIKit
 
 class DataTextFieldViewModel: ObservableObject {
     
-    var text = ""
+    @Published var text = "" {
+        didSet {
+            
+        }
+    }
     
-    @Published var placeholder = ""
+     var placeholder = ""
 
-    @Published var isFocused = false
+    @Published var isFirstResponder = false
         
-    @Published var textIsValid = true {
+    var textIsValid = true {
         didSet {
             if textIsValid  {
                 backgroundColor = UIColor(.background)
@@ -89,17 +93,16 @@ class DataTextFieldViewModel: ObservableObject {
 //    }
     
     func format(phone: String, mask: String) -> String {
-        let filteredPhoneNumber = phone.replacingOccurrences(
+        var filteredPhoneNumber = phone.replacingOccurrences(
             of: "[^0-9]", with: "",
             options: .regularExpression
-        ) 
-//        {
-//            didSet {
-//                if filteredPhoneNumber == "" {
-//                    filteredPhoneNumber = ""
-//                }
-//            }
-//        }
+        ) {
+            didSet {
+                if filteredPhoneNumber == "" {
+                    filteredPhoneNumber = "7"
+                }
+            }
+        }
         
         var result = ""
         var index = filteredPhoneNumber.startIndex

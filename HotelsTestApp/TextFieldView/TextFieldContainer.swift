@@ -9,8 +9,8 @@ import SwiftUI
 
 struct TextFieldContainer: UIViewRepresentable {
     @Binding var textIsValid: Bool 
+    @Binding var text: String
     
-    var text: String
     let fieldFormat: FieldFormat
     var placeholder: String
     var isFirstResponder: Bool
@@ -56,12 +56,15 @@ struct TextFieldContainer: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UITextField, context: UIViewRepresentableContext<TextFieldContainer>) {
-        uiView.text = self.text
-        context.coordinator.updateParent(self)
+        if uiView.text != self.text {
+            uiView.text = self.text
+        }
         
         switch isFirstResponder {
         case true: uiView.becomeFirstResponder()
         case false: uiView.resignFirstResponder()
         }
+        
+        context.coordinator.updateParent(self)
     }
 }
