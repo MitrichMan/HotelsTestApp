@@ -18,7 +18,16 @@ class DataTextFieldViewModel: ObservableObject {
     
      var placeholder = ""
 
-    @Published var isFirstResponder = false
+    @Published var isFirstResponder = false {
+        didSet {
+            if !wasTapped {
+                wasTapped.toggle()
+            }
+            print("VM isFirstResponder = \(isFirstResponder)")
+        }
+    }
+    
+    @Published var wasTapped = false
         
     var textIsValid = true {
         didSet {

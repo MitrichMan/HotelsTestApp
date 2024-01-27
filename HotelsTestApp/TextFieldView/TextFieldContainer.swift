@@ -10,24 +10,14 @@ import SwiftUI
 struct TextFieldContainer: UIViewRepresentable {
     @Binding var textIsValid: Bool 
     @Binding var text: String
+    @Binding var isFirstResponder: Bool {
+        didSet {
+            print("Container isFirstResponder = \(isFirstResponder)")
+        }
+    }
     
     let fieldFormat: FieldFormat
     var placeholder: String
-    var isFirstResponder: Bool
-    
-//    init(
-//        placeholder: String,
-//        text: String,
-//        fieldFormat: FieldFormat,
-//        isFirstResponder: Bool,
-//        textIsValid: Bool
-//    ) {
-//        self.placeholder = placeholder
-//        self.text = text
-//        self.fieldFormat = fieldFormat
-//        self.isFirstResponder = isFirstResponder
-//        self.textIsValid = textIsValid
-//    }
     
     func makeCoordinator() -> TextFieldCoordinator {
         TextFieldCoordinator(self)
@@ -61,8 +51,14 @@ struct TextFieldContainer: UIViewRepresentable {
         }
         
         switch isFirstResponder {
-        case true: uiView.becomeFirstResponder()
-        case false: uiView.resignFirstResponder()
+        case true:
+            DispatchQueue.main.async {
+                uiView.becomeFirstResponder()
+            }
+        case false:
+            DispatchQueue.main.async {
+                uiView.resignFirstResponder()
+            }
         }
         
         context.coordinator.updateParent(self)

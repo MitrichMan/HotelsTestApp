@@ -22,7 +22,6 @@ struct DataTextFieldView: View {
                 HStack {
                     Text(fieldName)
                         .foregroundStyle(.gray)
-                        .transition(.slide)
                         .onTapGesture {
                             viewModel.isFirstResponder = true
                         }
@@ -30,16 +29,14 @@ struct DataTextFieldView: View {
                     Spacer()
                 }
                 
-                if viewModel.isFirstResponder {
+                if viewModel.wasTapped {
                     TextFieldContainer(
                         textIsValid: $viewModel.textIsValid,
                         text: $viewModel.text,
+                        isFirstResponder: $viewModel.isFirstResponder,
                         fieldFormat: fieldFormat,
-                        placeholder: viewModel.placeholder,
-                        isFirstResponder: viewModel.isFirstResponder
+                        placeholder: viewModel.placeholder
                     )
-                    
-                    .transition(.slide)
                 }
             }
             

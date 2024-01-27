@@ -37,10 +37,13 @@ class TextFieldCoordinator: NSObject, UITextFieldDelegate {
         if self.parent.textIsValid != textIsValid {
             self.parent.textIsValid = textIsValid
         }
+        if self.parent.text.count != 0 {
+            if self.parent.isFirstResponder {
+                self.parent.isFirstResponder = false
+            }
+        }
         
-//        if textIsValid {
-            self.parent.text = text
-//        }
+        self.parent.text = text
     }
     
     @objc func phoneNumberFieldDidChange(_ textField: UITextField) {
