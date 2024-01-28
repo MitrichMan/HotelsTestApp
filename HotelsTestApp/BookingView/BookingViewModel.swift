@@ -89,12 +89,15 @@ final class BookingViewModel: ObservableObject {
             case .dates:
                 dataToDisplay.append(DataViewData(
                     title: name.rawValue,
-                    subtitle: "\(bookingData.tourDateStop) - \(bookingData.tourDateStop)", 
+                    subtitle: "\(bookingData.tourDateStop) - \(bookingData.tourDateStop)",
                     presentationMode: .narrow
                 ))
             case .numberOfNights:
-                dataToDisplay.append(DataViewData(title: name.rawValue, subtitle: String(bookingData.numberOfNights), 
-                                                  presentationMode: .narrow))
+                dataToDisplay.append(DataViewData(
+                    title: name.rawValue,
+                    subtitle: String(bookingData.numberOfNights),
+                    presentationMode: .narrow
+                ))
             case .hotelName:
                 dataToDisplay.append(DataViewData(
                     title: name.rawValue,

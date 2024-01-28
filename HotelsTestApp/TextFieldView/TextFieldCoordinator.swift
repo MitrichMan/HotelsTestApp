@@ -10,7 +10,7 @@ import UIKit
 class TextFieldCoordinator: NSObject, UITextFieldDelegate {
     var parent: TextFieldContainer
     
-    var textIsValid = true 
+    var textIsValid = true
     
     init(_ textFieldContainer: TextFieldContainer) {
         self.parent = textFieldContainer
@@ -49,7 +49,10 @@ class TextFieldCoordinator: NSObject, UITextFieldDelegate {
     @objc func phoneNumberFieldDidChange(_ textField: UITextField) {
         guard let text = textField.text else { return }
         
-        let phoneNumber = formatTextToPhoneNumber(phone: text, mask: "+* (***) ***-**-**")
+        let phoneNumber = formatTextToPhoneNumber(
+            phone: text,
+            mask: DataManager.shared.getMask(for: parent.fieldFormat)
+        )
         
         if textField.text != phoneNumber {
             textField.text = phoneNumber

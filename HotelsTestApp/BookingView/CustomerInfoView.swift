@@ -23,7 +23,7 @@ struct CustomerInfoView: View {
                 
                 ForEach(DataManager.shared.customerDataFieldNames, id: \.self) { name in
                     DataTextFieldView(
-                        text: phone,
+                        text: name == .phone ? phone : email,
                         fieldName: name.rawValue,
                         fieldFormat: chooseFieldFormat(for: name)
                     )

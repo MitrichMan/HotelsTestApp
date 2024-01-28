@@ -10,6 +10,7 @@
 		4D0DED9C2B348BEA00DCADA2 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0DED9B2B348BEA00DCADA2 /* DataManager.swift */; };
 		4D0DED9F2B35C2EE00DCADA2 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0DED9E2B35C2EE00DCADA2 /* CarouselView.swift */; };
 		4D0DEDA22B35C31100DCADA2 /* CarouselViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0DEDA12B35C31100DCADA2 /* CarouselViewModel.swift */; };
+		4D0E5B5A2B66A6BE00A4DA64 /* PersonalDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0E5B592B66A6BE00A4DA64 /* PersonalDataView.swift */; };
 		4D1300032B3DDA87009FA35F /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1300022B3DDA87009FA35F /* ListRowView.swift */; };
 		4D1300052B3DDB55009FA35F /* TileStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1300042B3DDB55009FA35F /* TileStackView.swift */; };
 		4D13FFFF2B3DD970009FA35F /* TableWithButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D13FFFE2B3DD970009FA35F /* TableWithButtonsView.swift */; };
@@ -49,6 +50,7 @@
 		4D0DED9B2B348BEA00DCADA2 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		4D0DED9E2B35C2EE00DCADA2 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		4D0DEDA12B35C31100DCADA2 /* CarouselViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselViewModel.swift; sourceTree = "<group>"; };
+		4D0E5B592B66A6BE00A4DA64 /* PersonalDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDataView.swift; sourceTree = "<group>"; };
 		4D1300022B3DDA87009FA35F /* ListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRowView.swift; sourceTree = "<group>"; };
 		4D1300042B3DDB55009FA35F /* TileStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileStackView.swift; sourceTree = "<group>"; };
 		4D13FFFE2B3DD970009FA35F /* TableWithButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableWithButtonsView.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				4DBF14B12B3CD3B000799468 /* CustomerInfoView.swift */,
 				4DBF14B32B3CD3F100799468 /* TouristDataView.swift */,
 				4DBF14B52B3CD42E00799468 /* AddTouristView.swift */,
+				4D0E5B592B66A6BE00A4DA64 /* PersonalDataView.swift */,
 			);
 			path = BookingView;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				4DEFCBF22B3CD700004C9988 /* DataTextFieldView.swift in Sources */,
 				4DBF14A42B3C4B1600799468 /* CoordinatorView.swift in Sources */,
 				4DBF14B42B3CD3F100799468 /* TouristDataView.swift in Sources */,
+				4D0E5B5A2B66A6BE00A4DA64 /* PersonalDataView.swift in Sources */,
 				4D0DED9C2B348BEA00DCADA2 /* DataManager.swift in Sources */,
 				4DBF14B02B3CD35600799468 /* DataView.swift in Sources */,
 				4D0DED9F2B35C2EE00DCADA2 /* CarouselView.swift in Sources */,

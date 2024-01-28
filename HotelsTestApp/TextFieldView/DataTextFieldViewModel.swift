@@ -23,7 +23,6 @@ class DataTextFieldViewModel: ObservableObject {
             if !wasTapped {
                 wasTapped.toggle()
             }
-            print("VM isFirstResponder = \(isFirstResponder)")
         }
     }
     
@@ -60,6 +59,9 @@ class DataTextFieldViewModel: ObservableObject {
                 formattedEmail = "&-#_%.^sdfx@rfgcvgv"
                 text = formattedEmail
                 placeholder = CustomerDataFieldName.email.rawValue
+            case .date:
+                text = "00.00.0000"
+                placeholder = TouristDataFieldName.dateOfBirth.rawValue
             }
         }
     }

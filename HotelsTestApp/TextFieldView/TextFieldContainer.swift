@@ -10,11 +10,7 @@ import SwiftUI
 struct TextFieldContainer: UIViewRepresentable {
     @Binding var textIsValid: Bool 
     @Binding var text: String
-    @Binding var isFirstResponder: Bool {
-        didSet {
-            print("Container isFirstResponder = \(isFirstResponder)")
-        }
-    }
+    @Binding var isFirstResponder: Bool
     
     let fieldFormat: FieldFormat
     var placeholder: String
@@ -38,6 +34,8 @@ struct TextFieldContainer: UIViewRepresentable {
             innerTextField.keyboardType = .numberPad
         case .email:
             innerTextField.keyboardType = .emailAddress
+        case .date:
+            innerTextField.keyboardType = .numberPad
         }
 
         context.coordinator.setup(innerTextField)

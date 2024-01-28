@@ -57,6 +57,11 @@ struct Room: Decodable {
     let imageUrls: [String]
 }
 
+struct Customer {
+    var phone: String
+    var email: String
+}
+
 struct Tourist {
     var name: String
     var lastName: String
@@ -65,27 +70,6 @@ struct Tourist {
     var passportNumber: String
     var passportExpirationDate: String
     var isPresented = true
-    
-    init(
-        name: String,
-        lastName: String,
-        dateOfBirth: String,
-        citizenship: String,
-        passportNumber: String,
-        passportExpirationDate: String
-    ) {
-        self.name = name
-        self.lastName = lastName
-        self.dateOfBirth = dateOfBirth
-        self.citizenship = citizenship
-        self.passportNumber = passportNumber
-        self.passportExpirationDate = passportExpirationDate
-    }
-}
-
-struct Customer {
-    var phone: String
-    var email: String
 }
 
 struct HotelButton {    
@@ -94,8 +78,13 @@ struct HotelButton {
     let image: String
 }
 
-struct DataViewData: Hashable{
+struct DataViewData: Hashable {
     let title: String
     let subtitle: String
     let presentationMode: PresentationMode
+}
+
+struct PersonalData {
+    var customer: Customer
+    var tourists: [Tourist]
 }
