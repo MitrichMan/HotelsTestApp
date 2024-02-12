@@ -25,8 +25,6 @@ struct DetailedDataView: View {
                     Spacer()
                 }
                 
-                
-                
                 HStack {
                     TileStackView(
                         content: hotel.aboutTheHotel.peculiarities,

@@ -83,73 +83,61 @@ final class BookingViewModel: ObservableObject {
             case .arrivalCountry:
                 dataToDisplay.append(DataViewData(
                     title: name.rawValue,
-                    subtitle: bookingData.arrivalCountry, 
-                    presentationMode: .narrow
+                    subtitle: bookingData.arrivalCountry
                 ))
             case .dates:
                 dataToDisplay.append(DataViewData(
                     title: name.rawValue,
-                    subtitle: "\(bookingData.tourDateStop) - \(bookingData.tourDateStop)",
-                    presentationMode: .narrow
+                    subtitle: "\(bookingData.tourDateStart) - \(bookingData.tourDateStop)"
                 ))
             case .numberOfNights:
                 dataToDisplay.append(DataViewData(
                     title: name.rawValue,
-                    subtitle: String(bookingData.numberOfNights),
-                    presentationMode: .narrow
+                    subtitle: String(bookingData.numberOfNights)
                 ))
             case .hotelName:
                 dataToDisplay.append(DataViewData(
                     title: name.rawValue,
-                    subtitle: bookingData.hotelName, 
-                    presentationMode: .narrow
+                    subtitle: bookingData.hotelName
                 ))
             case .room:
                 dataToDisplay.append(DataViewData(
                     title: name.rawValue,
-                    subtitle: bookingData.room, 
-                    presentationMode: .narrow
+                    subtitle: bookingData.room
                 ))
             case .nutrition:
                 dataToDisplay.append(DataViewData(
                     title: name.rawValue,
-                    subtitle: bookingData.nutrition, 
-                    presentationMode: .narrow
+                    subtitle: bookingData.nutrition
                 ))
             case .departure:
                 dataToDisplay.append(DataViewData(
                     title: name.rawValue,
-                    subtitle: bookingData.departure, 
-                    presentationMode: .narrow
+                    subtitle: bookingData.departure
                 ))
                 
             case .tourPrice:
                 dataToDisplay.append(DataViewData(
                     title: name.rawValue,
-                    subtitle: "\(bookingData.tourPrice) ₽",
-                    presentationMode: .wide
+                    subtitle: "\(bookingData.tourPrice) ₽"
                 ))
             case .fuelCharge:
                 dataToDisplay.append(DataViewData(
                     title: name.rawValue,
-                    subtitle: "\(bookingData.fuelCharge) ₽",
-                    presentationMode: .wide
+                    subtitle: "\(bookingData.fuelCharge) ₽"
                 ))
             case .serviceCharge:
                 dataToDisplay.append(DataViewData(
                     title: name.rawValue,
-                    subtitle: "\(bookingData.serviceCharge) ₽",
-                    presentationMode: .wide
+                    subtitle: "\(bookingData.serviceCharge) ₽"
                 ))
             case .totalPrice:
                 dataToDisplay.append(DataViewData(
                     title: name.rawValue,
-                    subtitle: "\(bookingData.tourPrice + bookingData.fuelCharge + bookingData.serviceCharge) ₽",
-                    presentationMode: .wide
+                    subtitle: "\(bookingData.tourPrice + bookingData.fuelCharge + bookingData.serviceCharge) ₽"
                 ))
             }
         }
-        
         return dataToDisplay
     }
 }

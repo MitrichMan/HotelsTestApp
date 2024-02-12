@@ -110,8 +110,8 @@
 		4DBF14A52B3C4B2A00799468 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				4DBF14A12B3C476D00799468 /* Coordinator.swift */,
 				4DBF14A32B3C4B1600799468 /* CoordinatorView.swift */,
+				4DBF14A12B3C476D00799468 /* Coordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -150,7 +150,6 @@
 		4DBF8FE32B31C84B006FA6A7 /* HotelsTestApp */ = {
 			isa = PBXGroup;
 			children = (
-				4DEFCBF32B3D9ACD004C9988 /* Extensions */,
 				4DBF8FE42B31C84B006FA6A7 /* HotelsTestAppApp.swift */,
 				4DBF14A52B3C4B2A00799468 /* Coordinator */,
 				4DBF8FF72B31D98B006FA6A7 /* HotelView */,
@@ -158,10 +157,11 @@
 				4DBF90022B31DA2D006FA6A7 /* BookingView */,
 				4D0DEDA02B35C2FC00DCADA2 /* CarouselView */,
 				4DBF900A2B31FFB9006FA6A7 /* SuccessView */,
-				4DBF8FF62B31D871006FA6A7 /* Models */,
-				4DBF14A82B3CD1F100799468 /* UI */,
 				4DE5C7A82B50479700E7C296 /* TextFieldView */,
+				4DBF14A82B3CD1F100799468 /* UI */,
+				4DBF8FF62B31D871006FA6A7 /* Models */,
 				4DBF90072B31DAA3006FA6A7 /* Services */,
+				4DEFCBF32B3D9ACD004C9988 /* Extensions */,
 				4DBF8FE82B31C84E006FA6A7 /* Assets.xcassets */,
 				4DBF8FEA2B31C84E006FA6A7 /* Preview Content */,
 			);

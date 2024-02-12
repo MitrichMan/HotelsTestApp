@@ -9,6 +9,19 @@ import SwiftUI
 
 struct DataView: View {
     var data: [DataViewData]
+    let presentationMode: PresentationMode
+    
+    let columns = [
+        GridItem(.flexible(
+            minimum: 0,
+            maximum: 140)
+                 
+        ),
+        GridItem(.flexible(
+            minimum: 0,
+            maximum: 203)
+        )
+    ]
     
     var body: some View {
         ZStack {
@@ -17,24 +30,35 @@ struct DataView: View {
                 columns: [
                     GridItem(.flexible(
                         minimum: 0,
-                        maximum: 140)
-
-                    ),
+                        maximum: 140
+                    )),
                     GridItem(.flexible(
                         minimum: 0,
-                        maximum: 203)
-                    )
+                        maximum: 203
+                    ))
                 ],
                 alignment: .leading,
                 spacing: 8,
                 content: {
                     ForEach(data, id: \.self) { data in
-                            
+                        
                         Text(data.title)
                             .font(.system(size: 16, weight: .medium))
                             .foregroundStyle(.gray)
-                                            
-                        Text(data.subtitle)
+                        
+                        HStack {
+                            if presentationMode == .wide {
+                                Spacer()
+                                
+                                Text(data.subtitle)
+                                    .frame(alignment: .trailing)
+                            } else {
+                                Text(data.subtitle)
+                                    .frame(alignment: .leading)
+                                
+                                Spacer()
+                            }
+                        }
                     }
                 }
             )

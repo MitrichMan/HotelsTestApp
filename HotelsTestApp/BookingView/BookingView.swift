@@ -27,19 +27,25 @@ struct BookingView: View {
                                 DataView(
                                     data: viewModel.prepareBookingDataViewData(
                                         names: viewModel.bookingDataNames
-                                    )
+                                    ), 
+                                    presentationMode: .narrow
                                 )
                                 
-                                CustomerInfoView(phone: $viewModel.customer.phone, email: $viewModel.customer.email)
+                                CustomerInfoView(
+                                    phone: $viewModel.customer.phone,
+                                    email: $viewModel.customer.email
+                                )
                                 
                                 TouristDataView(tourists: $viewModel.tourists)
+                                
                                 
                                 AddTouristView(action: viewModel.addTourist)
                                 
                                 DataView(
                                     data: viewModel.prepareBookingDataViewData(
                                         names: viewModel.finalPriceNames
-                                    )
+                                    ),
+                                    presentationMode: .wide
                                 )
                             }
                         }

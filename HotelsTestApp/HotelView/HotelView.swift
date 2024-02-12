@@ -30,7 +30,7 @@ struct HotelView: View {
                         }
                     }
                     GoToDestinationButtonView(
-                        text: "К выбору номера", 
+                        text: "К выбору номера",
                         page: .rooms
                     )
                     .environmentObject(coordinator)
@@ -39,9 +39,9 @@ struct HotelView: View {
                 .navigationTitle("Отель")
                 .navigationBarTitleDisplayMode(.inline)
             
-            .task {
-                await viewModel.fetchHotel()
-            }
+                .task {
+                    await viewModel.fetchHotel()
+                }
         }
     }
 }

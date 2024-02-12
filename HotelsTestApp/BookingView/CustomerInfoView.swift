@@ -11,6 +11,7 @@ struct CustomerInfoView: View {
     @Binding var phone: String
     @Binding var email: String
     
+    
     var body: some View {
         ZStack {
             Color.white

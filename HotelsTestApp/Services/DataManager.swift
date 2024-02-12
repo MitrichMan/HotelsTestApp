@@ -77,33 +77,33 @@ class DataManager: ObservableObject {
         
     private init() {}
     
-    func prepareBookingData(name: BookingDataFieldName, data: BookingData) -> String {
-        switch name {
-        case .arrivalCountry:
-            data.arrivalCountry
-        case .dates:
-            "\(data.tourDateStop) - \(data.tourDateStop)"
-        case .numberOfNights:
-            "\(data.numberOfNights)"
-        case .hotelName:
-            data.hotelName
-        case .room:
-            data.room
-        case .nutrition:
-            data.nutrition
-        case .departure:
-            data.departure
-            
-        case .tourPrice:
-            String(data.tourPrice)
-        case .fuelCharge:
-            String(data.fuelCharge)
-        case .serviceCharge:
-            String(data.serviceCharge)
-        case .totalPrice:
-            String(data.tourPrice + data.fuelCharge + data.serviceCharge)
-        }
-    }
+//    func prepareBookingData(name: BookingDataFieldName, data: BookingData) -> String {
+//        switch name {
+//        case .arrivalCountry:
+//            data.arrivalCountry
+//        case .dates:
+//            "\(data.tourDateStop) - \(data.tourDateStop)"
+//        case .numberOfNights:
+//            "\(data.numberOfNights)"
+//        case .hotelName:
+//            data.hotelName
+//        case .room:
+//            data.room
+//        case .nutrition:
+//            data.nutrition
+//        case .departure:
+//            data.departure
+//            
+//        case .tourPrice:
+//            String(data.tourPrice)
+//        case .fuelCharge:
+//            String(data.fuelCharge)
+//        case .serviceCharge:
+//            String(data.serviceCharge)
+//        case .totalPrice:
+//            String(data.tourPrice + data.fuelCharge + data.serviceCharge)
+//        }
+//    }
     
     func prepareTouristData(name: TouristDataFieldName, data: Tourist) -> String {
         switch name {

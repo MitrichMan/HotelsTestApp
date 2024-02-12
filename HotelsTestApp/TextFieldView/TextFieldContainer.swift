@@ -50,9 +50,12 @@ struct TextFieldContainer: UIViewRepresentable {
         
         switch isFirstResponder {
         case true:
-            DispatchQueue.main.async {
-                uiView.becomeFirstResponder()
+            if !uiView.isFirstResponder {
+                DispatchQueue.main.async {
+                    uiView.becomeFirstResponder()
+                }
             }
+            
         case false:
             DispatchQueue.main.async {
                 uiView.resignFirstResponder()

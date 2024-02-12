@@ -81,7 +81,6 @@ struct HotelButton {
 struct DataViewData: Hashable {
     let title: String
     let subtitle: String
-    let presentationMode: PresentationMode
 }
 
 struct PersonalData {
