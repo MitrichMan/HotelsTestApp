@@ -25,9 +25,7 @@ struct BookingView: View {
                                 )
                                                                 
                                 DataView(
-                                    data: viewModel.prepareBookingDataViewData(
-                                        names: viewModel.bookingDataNames
-                                    ), 
+                                    data: viewModel.hotelData,
                                     presentationMode: .narrow
                                 )
                                 
@@ -42,9 +40,7 @@ struct BookingView: View {
                                 AddTouristView(action: viewModel.addTourist)
                                 
                                 DataView(
-                                    data: viewModel.prepareBookingDataViewData(
-                                        names: viewModel.finalPriceNames
-                                    ),
+                                    data: viewModel.priceData,
                                     presentationMode: .wide
                                 )
                             }

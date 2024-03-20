@@ -37,10 +37,9 @@ class TextFieldCoordinator: NSObject, UITextFieldDelegate {
         if self.parent.textIsValid != textIsValid {
             self.parent.textIsValid = textIsValid
         }
-        if self.parent.text.count != 0 {
-            if self.parent.isFirstResponder {
-                self.parent.isFirstResponder = false
-            }
+        
+        if self.parent.isFirstResponder {
+            self.parent.isFirstResponder.toggle()
         }
         
         self.parent.text = text
@@ -95,7 +94,7 @@ class TextFieldCoordinator: NSObject, UITextFieldDelegate {
                 result.append(character)
             }
         }
-
+        
         return result + mask.dropFirst(result.count)
     }
     

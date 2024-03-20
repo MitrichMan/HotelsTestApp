@@ -14,20 +14,25 @@ struct RoomsView: View {
     var body: some View {
         ZStack {
             Color("Background")
-            
             ScrollView {
-                VStack(spacing: 0) {
-                    ForEach(0...viewModel.rooms.rooms.count - 1, id: \.self) { index in
-                        RoomView(
-                            room: viewModel.rooms.rooms[index]
-                        )
-                        
-                        GoToDestinationButtonView(
-                            text: "Выбрать номер",
-                            page: .booking
-                        )
+                ForEach(0...viewModel.rooms.rooms.count - 1, id: \.self) { index in
+                    ZStack {
+                        Color.white
+                            .cornerRadius(12)
+                        VStack {
+                            RoomView(
+                                room: viewModel.rooms.rooms[index]
+                            )
+                            
+                            GoToDestinationButtonView(
+                                text: "Выбрать номер",
+                                page: .booking
+                            )
+                        }
+                        .padding()
                     }
                 }
+                .padding(.vertical)
             }
         }
         .navigationTitle("ERTYUILKJH")

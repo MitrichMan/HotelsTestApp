@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GoToDestinationButtonView: View {
     @EnvironmentObject private var coordinator: Coordinator
-
+    
     let text: String
     let page: Page
     

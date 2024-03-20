@@ -28,9 +28,6 @@ struct CarouselView: View {
             .frame(height: 257)
             .cornerRadius(15)
             
-            .padding(.top)
-            .padding(.horizontal)
-            
             .onChange(of: imageUrls) {
                 viewModel.fetchImages(from: imageUrls)
             }
@@ -43,12 +40,10 @@ struct CarouselView: View {
             }
             .frame(height: 257)
             .cornerRadius(15)
-            .padding(.top)
-            .padding(.horizontal)
             
-                        .onAppear(perform:  {
-            viewModel.fetchImages(from: imageUrls)
-        })
+            .onAppear(perform:  {
+                viewModel.fetchImages(from: imageUrls)
+            })
             .onChange(of: imageUrls) {
                 viewModel.fetchImages(from: imageUrls)
             }

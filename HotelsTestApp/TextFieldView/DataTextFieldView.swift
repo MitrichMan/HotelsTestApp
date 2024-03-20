@@ -29,7 +29,7 @@ struct DataTextFieldView: View {
                     Spacer()
                 }
                 
-                if viewModel.wasTapped {
+                if viewModel.isFullyPresented {
                     TextFieldContainer(
                         textIsValid: $viewModel.textIsValid,
                         text: $viewModel.text,
@@ -47,7 +47,7 @@ struct DataTextFieldView: View {
             
             .onChange(of: text) {
                 if fieldFormat == .phoneNumber {
-                    text = viewModel.formattedPhoneNumber
+                    text = viewModel.formattedText
                 }
             }
             .padding(.vertical, 10)

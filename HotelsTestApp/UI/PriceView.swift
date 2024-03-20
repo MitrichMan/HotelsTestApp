@@ -24,7 +24,5 @@ struct PriceView: View {
             
             Spacer()
         }
-        .padding(.horizontal)
-        .padding(.bottom)
     }
 }

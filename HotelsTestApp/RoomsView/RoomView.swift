@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct RoomView: View {
+    @EnvironmentObject private var coordinator: Coordinator
+
     let room: Room
     
     var body: some View {
         ZStack {
             Color.white
+                .ignoresSafeArea()
             VStack(alignment: .leading, spacing: 8) {
                 CarouselView(
                     imageUrls:
@@ -49,10 +52,7 @@ struct RoomView: View {
                 )
                 .padding(.bottom, 8)
             }
-            .padding(16)
         }
-        .cornerRadius(12)
-        .padding(.top, 8)
     }
 }
 

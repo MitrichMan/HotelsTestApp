@@ -105,6 +105,72 @@ class DataManager: ObservableObject {
 //        }
 //    }
     
+    func prepareBookingDataViewData(names: [BookingDataFieldName], from bookingData: BookingData) -> [DataViewData] {
+        var dataToDisplay: [DataViewData] = []
+        
+        for name in names {
+            switch name {
+            case .arrivalCountry:
+                dataToDisplay.append(DataViewData(
+                    title: name.rawValue,
+                    subtitle: bookingData.arrivalCountry
+                ))
+            case .dates:
+                dataToDisplay.append(DataViewData(
+                    title: name.rawValue,
+                    subtitle: "\(bookingData.tourDateStart) - \(bookingData.tourDateStop)"
+                ))
+            case .numberOfNights:
+                dataToDisplay.append(DataViewData(
+                    title: name.rawValue,
+                    subtitle: String(bookingData.numberOfNights)
+                ))
+            case .hotelName:
+                dataToDisplay.append(DataViewData(
+                    title: name.rawValue,
+                    subtitle: bookingData.hotelName
+                ))
+            case .room:
+                dataToDisplay.append(DataViewData(
+                    title: name.rawValue,
+                    subtitle: bookingData.room
+                ))
+            case .nutrition:
+                dataToDisplay.append(DataViewData(
+                    title: name.rawValue,
+                    subtitle: bookingData.nutrition
+                ))
+            case .departure:
+                dataToDisplay.append(DataViewData(
+                    title: name.rawValue,
+                    subtitle: bookingData.departure
+                ))
+                
+            case .tourPrice:
+                dataToDisplay.append(DataViewData(
+                    title: name.rawValue,
+                    subtitle: "\(bookingData.tourPrice) ₽"
+                ))
+            case .fuelCharge:
+                dataToDisplay.append(DataViewData(
+                    title: name.rawValue,
+                    subtitle: "\(bookingData.fuelCharge) ₽"
+                ))
+            case .serviceCharge:
+                dataToDisplay.append(DataViewData(
+                    title: name.rawValue,
+                    subtitle: "\(bookingData.serviceCharge) ₽"
+                ))
+            case .totalPrice:
+                dataToDisplay.append(DataViewData(
+                    title: name.rawValue,
+                    subtitle: "\(bookingData.tourPrice + bookingData.fuelCharge + bookingData.serviceCharge) ₽"
+                ))
+            }
+        }
+        return dataToDisplay
+    }
+    
     func prepareTouristData(name: TouristDataFieldName, data: Tourist) -> String {
         switch name {
         case .name:
@@ -155,7 +221,7 @@ class DataManager: ObservableObject {
         case .phoneNumber:
             return "+* (***) ***-**-**"
         case .email:
-            return ""
+            return "****@***.com"
         case .date:
             return "**.**.****"
         }
